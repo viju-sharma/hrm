@@ -1,0 +1,26 @@
+.SingleRow td {
+  margin: 1rem 15rem;
+  padding: 2rem;
+  width: 20rem;
+  text-align: center;
+  color: white;
+  box-sizing: border-box;
+  border: 0px;
+  overflow-x: hidden;
+}
+
+.SingleRow {
+  margin: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: all 0.1s linear;
+  border: 0px;
+}
+
+.SingleRow:hover,
+.SingleRow:hover > td {
+  font-size: 1.015rem;
+  border: none;
+  background-color: rgb(0, 0, 0, 0.05);
+  border: 0px;
+}

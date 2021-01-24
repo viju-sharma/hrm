@@ -1,0 +1,20 @@
+body {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  background-color: #fcfcfc;
+}
+
+/* body::before{
+    content: '';
+    background-image: url("https://images.unsplash.com/photo-1528460033278-a6ba57020470?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80");
+    height: 100vw;
+    background-size: cover;
+    background-position: top center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+} */

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
+
+.NavItem {
+  margin: 0;
+  padding: 0 1.5rem;
+  display: flex;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-size: 1.05vw;
+  font-family: 'Source Sans Pro', sans-serif;
+  letter-spacing: 1.5px;
+  transition: all 0.2s ease-out;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.NavItem a {
+  color: white;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  font-weight: 500;
+  transition: color 0.12s linear;
+}
+.NavItem:hover {
+  background-color: rgb(247, 247, 252);
+}
+
+.NavItem:hover > a {
+  color: black;
+}
+
+/* 
+.NavItem a::after {
+  content: ' ';
+  position: absolute;
+  top: 1.2vw;
+  left: 0;
+  width: 0;
+  height: 0;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+}
+
+.NavItem a:hover::after {
+  animation: animate 0.3s ease forwards;
+}
+
+@keyframes animate {
+  0% {
+    width: 0;
+    height: 0;
+    border-bottom-color: white;
+  }
+  100% {
+    width: 100%;
+    height: 0;
+    border-bottom-color: white;
+  }
+} */

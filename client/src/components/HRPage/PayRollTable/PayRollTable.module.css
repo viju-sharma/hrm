@@ -1,0 +1,17 @@
+.PayRollTable {
+  position: relative;
+  left: 6rem;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.PayRollTable th {
+  margin: 5px 15rem;
+  padding: 1rem;
+  width: 15rem;
+  box-sizing: border-box;
+  text-align: center;
+  color: white;
+  background-color: rgb(0, 0, 0, 0.4);
+  border: 0px;
+}

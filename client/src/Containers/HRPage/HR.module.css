@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+.BackgroundDiv {
+  position: relative;
+}
+
+body {
+  background: #136a8a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #267871,
+    #136a8a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #267871,
+    #136a8a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* .BackgroundDiv::before {
+  content: '';
+  background-color: #286da8;
+  background-size: cover;
+  background-position: top center;
+  height: 100vw;
+  position: absolute;
+  z-index: -10;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 90%;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 92%,
+    0 92%,
+    0 92%,
+    14.7% 92%,
+    14.7% 0%,
+    0 0%
+  );
+} */
+
+.Div {
+  display: table;
+  height: 10vw;
+  position: relative;
+  top: 5vw;
+}
+
+.H2 {
+  font-size: 1.2vw;
+  color: white;
+  font-weight: 530;
+}
+
+.H3 {
+  font-size: 1vw;
+  color: white;
+  font-weight: 510;
+}
+
+.H1 {
+  color: white;
+  position: absolute;
+  top: 5vw;
+  left: 18vw;
+  font-size: 2vw;
+  letter-spacing: 1.5px;
+  font-family: 'Lora', serif;
+}
+
+.NumberOfEmployeesCard {
+  border: 2px inset black;
+  box-shadow: 1px 1px 5px 2px white;
+  width: 16vw;
+  height: 17vw;
+  position: relative;
+  left: 22vw;
+  top: 2vw;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(10, 22, 80, 0.3);
+  transition: all 0.1s linear;
+}
+
+.NumberOfEmployeesCard:hover {
+  border-color: white;
+}
+
+.ExistingEmployeesHeading {
+  color: white;
+  font-size: 1.5vw;
+  font-family: 'Merriweather', serif;
+}
+
+.NumberOfEmployees {
+  color: white;
+  font-size: 4vw;
+  position: relative;
+  top: 1.6vw;
+  text-shadow: 1px 1px 7px white;
+  margin: 0;
+}
+
+.AddEmployeeButton {
+  font-size: 1.1vw;
+  border-radius: 5px;
+  padding: 5px 8px;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  border: 1px solid lightsteelblue;
+  position: relative;
+  top: 4.75vw;
+  left: 2.19vw;
+  transition: all 0.15s ease-in-out;
+}
+
+.AddEmployeeButton:hover {
+  background-color: lightsteelblue;
+  cursor: pointer;
+  color: black;
+}
+
+.LeaveRequestCardsContainer {
+  position: absolute;
+  left: 25vw;
+  top: 9vw;
+  width: 65%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.RecentActivitiesDiv {
+  position: relative;
+  border: 2px inset black;
+  height: 25vw;
+  width: 55vw;
+  left: 21.5vw;
+  top: 8vw;
+  background-color: rgba(10, 22, 80, 0.3);
+  padding: 0 0.8vw;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 2px white;
+  transition: all 0.1s linear;
+}
+
+.RecentActivitiesDiv:hover {
+  border-color: white;
+}
+
+.RecentActivitiesDiv {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.PayrollManageDiv {
+  position: relative;
+  top: 1vw;
+  left: 16vw;
+  width: 70%;
+}
+
+.EmployeesDiv {
+  position: relative;
+  left: 21rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+}

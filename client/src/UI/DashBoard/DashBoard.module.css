@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+
+.Dashboard {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  width: 15vw;
+  justify-content: center;
+  align-items: center;
+  height: 90vw;
+  border-right: 1px solid white;
+  z-index: 1;
+}
+
+.DashboardList {
+  list-style: none;
+  position: absolute;
+  left: -1vw;
+  top: 10px;
+}
+
+.DashboardList li {
+  color: white;
+  margin: 40px 0;
+  font-size: 1.2vw;
+  white-space: nowrap;
+  font-weight: bold;
+  border: none;
+  overflow: hidden;
+  transition: text-shadow 0.15s ease-in-out;
+  font-family: 'Lora', serif;
+}
+
+.DashboardList li:hover {
+  text-shadow: 0 5px 10px black;
+  cursor: default;
+}

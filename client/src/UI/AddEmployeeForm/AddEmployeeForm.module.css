@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+.FormDiv {
+  text-align: center;
+}
+
+.AddEmployeeHeading {
+  font-size: 2.5rem;
+  color: black;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.textArea {
+  width: 34%;
+  height: 20%;
+  padding: 0.6vw;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  left: 14.2%;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  border: 4px solid transparent;
+  margin-top: 15px;
+  border-radius: 5px;
+  resize: none;
+}
+
+.textAreaInvalid {
+  width: 34%;
+  height: 20%;
+  padding: 0.6vw;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  left: 14.2%;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  border: 4px solid rgb(255, 0, 0, 0.2);
+  margin-top: 15px;
+  border-radius: 5px;
+  resize: none;
+  outline: none;
+}
+
+.textArea:focus {
+  border: 4px solid rgb(35, 105, 255, 0.2);
+  outline: none;
+}
+
+.InputElement {
+  outline: none;
+  font: inherit;
+  padding: 7px;
+  margin: 1vw;
+  background-color: #f5f5f5;
+  width: 34%;
+  box-sizing: border-box;
+  border: 4px solid transparent;
+  border-radius: 5px;
+}
+
+.InputElement[type='number']::-webkit-inner-spin-button,
+.InputElement[type='number']::-webkit-outer-spin-button {
+  -webkit-apprearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.InputElement:focus {
+  border: 4px solid rgb(35, 105, 255, 0.2);
+}
+
+.selectElement {
+  padding: 7px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  border: 3px solid transparent;
+  width: 34%;
+  box-sizing: border-box;
+}
+
+.selectElement:focus {
+  border: 3px solid rgb(35, 105, 255, 0.2);
+}
+
+.Invalid {
+  outline: none;
+  font: inherit;
+  padding: 7px;
+  margin: 1vw;
+  background-color: #f5f5f5;
+  width: 34%;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  border-radius: 5px;
+  border: 4px solid rgb(255, 0, 0, 0.2);
+}
+
+.Invalid[type='number']::-webkit-inner-spin-button,
+.Invalid[type='number']::-webkit-outer-spin-button {
+  -webkit-apprearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.InputElement[type='date']::before {
+  content: attr(placeholder);
+  width: 100%;
+}
+
+.addEmployeeButton {
+  font-size: 1vw;
+  font-weight: bold;
+  white-space: nowrap;
+  height: 2.5vw;
+  box-sizing: border-box;
+  background-color: black;
+  margin-top: 1.5rem;
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: white;
+  transition: background-color 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out;
+  animation: animateButton 0.1s linear;
+}
+
+@keyframes animateButton {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.addEmployeeButton:hover {
+  background-color: white;
+  color: black;
+}
+
+.DisabledButton {
+  font-size: 1vw;
+  font-weight: bold;
+  white-space: nowrap;
+  height: 2.5vw;
+  box-sizing: border-box;
+  margin-top: 1.5rem;
+  position: relative;
+  border-radius: 3px;
+  color: #ccc;
+  cursor: not-allowed;
+}

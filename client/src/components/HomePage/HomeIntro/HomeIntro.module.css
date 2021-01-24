@@ -1,0 +1,40 @@
+.Introduction {
+  text-align: center;
+  width: 100%;
+  height: 47.5rem;
+  z-index: -100;
+  background-color: transparent;
+  box-sizing: border-box;
+  opacity: 500%;
+  animation: revealIntroDiv 0.5s ease-out;
+}
+
+@keyframes revealIntroDiv {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap');
+
+.IntroductionHeading {
+  color: white;
+  z-index: 200;
+  margin: 0 auto;
+  position: absolute;
+  top: 19rem;
+  left: 28.5%;
+  font-family: 'Alegreya Sans', sans-serif;
+  letter-spacing: 3px;
+  font-size: 2.5vw;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+
+.Hub {
+  font-family: 'Kalam', cursive;
+  font-size: 2.8vw;
+}

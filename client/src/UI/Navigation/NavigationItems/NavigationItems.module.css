@@ -1,0 +1,14 @@
+.NavigationItems {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  position: absolute;
+  transform: translate(-120%, -50%);
+  box-sizing: border-box;
+  white-space: nowrap;
+  height: 100%;
+}

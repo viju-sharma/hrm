@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+.BackgroundDiv {
+  margin: 0;
+  padding: 0;
+  height: 55.2vw;
+  width: 100vw;
+}
+
+/* .BackgroundDiv::before {
+  content: '';
+  background-color: #286da8;
+  background-size: cover;
+  background-position: top center;
+  height: 100vw;
+  position: absolute;
+  z-index: -10;
+  top: 2rem;
+  left: 0;
+  bottom: 0;
+  right: 0;
+} */
+
+.WelcomeHeading {
+  position: absolute;
+  color: white;
+  top: 10.7vw;
+  left: 19vw;
+  font-size: 2.5vw;
+  word-spacing: 0.6rem;
+  letter-spacing: 0.1rem;
+  font-family: 'Lora', serif;
+  font-weight: 700;
+}
+
+.ProfileDivOnLoad {
+  background-color: rgb(0, 0, 0, 0.2);
+  position: relative;
+  border: 1px solid transparent;
+  width: 72.5vw;
+  top: 13vw;
+  left: 20vw;
+  padding-left: 1vw;
+}
+
+.LeaveButton {
+  position: relative;
+  top: 10vw;
+  left: 10vw;
+  font-size: 1.5vw;
+  background-color: transparent;
+  border: 1px solid red;
+  color: rgb(182, 182, 182);
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+  transition: color 0.12s ease-in-out;
+  height: 3vw;
+}
+
+.LeaveButton:hover {
+  background-color: red;
+  color: white;
+}
+
+.DetailsHeading {
+  color: white;
+  font-size: 1.4vw;
+  font-family: 'Merriweather', serif;
+  font-weight: 440;
+}
+
+.DashBoardDiv {
+  position: relative;
+  top: 9vw;
+  left: 0;
+  padding: 0;
+}
+
+.Footer {
+  position: absolute;
+  top: 90vw;
+  width: 100%;
+  background-color: transparent;
+  height: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerDiv {
+  text-align: center;
+  justify-content: center;
+}
+
+.H2 {
+  font-size: 1.2vw;
+  color: white;
+  font-weight: 530;
+}
+
+.H3 {
+  font-size: 1vw;
+  color: white;
+  font-weight: 510;
+}
+
+.ApplyLeaveDiv {
+  position: absolute;
+  top: 13vw;
+  left: 34.5vw;
+  background-color: rgb(0, 0, 0, 0.2);
+  padding: 0 2vw;
+  width: 41.5%;
+}

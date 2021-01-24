@@ -1,0 +1,6 @@
+POST http://localhost:4000/api/delete
+Content-Type: application/json
+
+{
+    "_id" : "600d2c42d501703a074d757b"
+}

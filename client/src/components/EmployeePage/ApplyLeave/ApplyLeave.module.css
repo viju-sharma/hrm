@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+.formContainerDiv {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.formContainerDiv h1 {
+  font-family: 'Lora', serif;
+  font-size: 2vw;
+  color: rgb(231, 231, 231);
+}
+
+.InputElement {
+  box-sizing: border-box;
+  width: 42.1%;
+  padding: 0.5rem;
+  margin: 1.5rem;
+  border-radius: 3px;
+}
+
+.InputElementArea {
+  box-sizing: border-box;
+  width: 91.8%;
+  padding: 1rem;
+  margin: 1.5rem;
+  border-radius: 3px;
+  resize: none;
+  height: 6rem;
+  outline: none;
+}
+
+.InputElement[type='date']::before {
+  color: rgb(66, 66, 66);
+  content: attr(placeholder) ' :';
+}
+
+.InputElement[type='date']:focus::before {
+  content: '' !important;
+}
+
+.ApplyLeaveButton {
+  position: relative;
+  left: 15.6rem;
+  padding: 7px;
+  font-size: 1rem;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  transition: all 0.15s linear;
+}
+
+.ApplyLeaveButton:hover {
+  background-color: black;
+  color: rgb(216, 216, 216);
+  border-color: black;
+}
