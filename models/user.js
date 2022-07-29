@@ -1,44 +1,32 @@
-const fs = require('fs');
-const path = require('path');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const p = path.join(path.dirname(require.main.filename), "data", "users.json");
-
-const getUsersFromFile = (cb)=> {
-  fs.readFile(p, (err, fileContent)=> {
-    if (err) {
-      cb([]);
-    }
-    cb(JSON.parse(fileContent));
-  })
-}
-
-module.exports = class User {
-  constructor(firstName, lastName, email, password)
+const usersSchema = new Schema(
   {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-  }
-  save() {
-    this.id = Math.random().toString();
-    getUsersFromFile((users) => {
-      users.push(this);
-      fs.writeFile(p, JSON.stringify(users), (err) => {
-        console.log(err);
-      });
-    });
-  }
-  static fetchAll(cb) {
-    getUsersFromFile(cb);
-  }
-
-  static fetchUserDetails(id, cb)
+    _id: {
+      type: String,
+      required: true,
+    },
+    firstname: {
+      type: String,
+      required: true,
+    },
+    lastname: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  },
   {
-    getUserFromFile(products => {
-      const product = products.find(p => p.id == id);
-      cb(product);
-    })
-
+    timestamps: true,
   }
-}
+);
+
+module.exports = mongoose.model("admin_users", usersSchema);
