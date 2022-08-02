@@ -4,19 +4,25 @@ const router = express.Router();
 
 const adminController = require("../controllers/admin");
 
-const protect = require("../middlewares/protect").protect;
-// /admin/add-product => GET
+const protect = require("../middlewares/protect");
 
-// /auth/signup => POST
+//show home page
 router.get("/", protect, adminController.HomePage);
 
-router.post("/signup", adminController.Signup);
+// add employee
+router.post("/addEmployee", protect, adminController.AddEmployee);
 
-router.post("/check", protect, adminController.checkJWT);
-//
-router.post("/login", adminController.Login);
+//edit Employee Details 
+router.post("/editEmployee", protect, adminController.editEmployee);
 
+// Delete Employee
+router.post("/deleteEmployee", protect, adminController.deleteEmployee);
+
+// See all userDetails
+router.get("/getUser", protect, adminController.getUser);
 // /admin/products => POST
-router.get("/users", adminController.getUsers);
+
+//to add leaves
+router.post("/addLeave", protect, adminController.addLeave);
 
 module.exports = router;

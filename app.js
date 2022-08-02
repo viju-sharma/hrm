@@ -7,7 +7,8 @@ const cors = require("cors");
 const logger = require("morgan");
 
 const mongoose = require("mongoose");
-const adminRoute = require("./routes/admin");
+const authRoutes = require("./routes/auth");
+const adminRoutes = require("./routes/admin");
 const { ObjectId } = require("mongodb");
 
 require("dotenv").config();
@@ -19,8 +20,9 @@ app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/auth", adminRoute);
-
+app.use("/auth", authRoutes);
+app.use("/employee", adminRoutes);
+app.use("/user", adminRoutes)
 mongoose
   .connect(process.env.MONGODB_CLUSTER)
   .then((result) => {

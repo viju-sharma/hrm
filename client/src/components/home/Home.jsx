@@ -7,17 +7,18 @@ const Home = () => {
   const dispatch = useDispatch();
   return (
     <div>
-      <Navigation />
+      <Navigation active={"home"} />
       <Container>
         <h1>this is home page we have to protect</h1>
-        <Button
+        <button
+          className="ui button secondary"
           onClick={() => {
             sessionStorage.clear();
             dispatch(logout());
           }}
         >
           Logout
-        </Button>
+        </button>
       </Container>
     </div>
   );

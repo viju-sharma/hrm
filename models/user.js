@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const usersSchema = new Schema(
   {
     _id: {
-      type: String,
+      type: mongoose.ObjectId,
       required: true,
     },
     firstname: {
@@ -23,6 +23,12 @@ const usersSchema = new Schema(
       type: String,
       required: true,
     },
+    employees: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "employee",
+      },
+    ],
   },
   {
     timestamps: true,

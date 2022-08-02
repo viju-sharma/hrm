@@ -1,73 +1,134 @@
-const bcrypt = require("bcrypt");
+const Employee = require("../models/employee");
 const User = require("../models/user");
-var jwt = require("jsonwebtoken");
-const { ObjectId } = require("mongodb");
-const signJWT = require("../middlewares/signJwt");
-
-exports.Signup = (req, res, next) => {
-  const saltRounds = 10;
-  const newId = new ObjectId().toString();
-  console.log(newId);
-  bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-    if (err) return err;
-    const _id = newId;
-    const password = hash;
-    const firstname = req.body.firstName;
-    const lastname = req.body.lastName;
-    const email = req.body.email;
-    console.log(_id, firstname, lastname, email, password);
-    const user = new User({ _id, firstname, lastname, email, password });
-    user
-      .save()
-      .then(() => {
-        const token = signJWT(newId);
-        res.status(201).send({token : token, userId : newId});
-      })
-      .catch((error) => {
-        console.log(err);
-      });
-  });
-};
-
-exports.getUsers = (req, res, next) => {
-  User.find().then((result) => {
-    console.log(result);
-    res.json(result);
-  });
-};
-
-/// I was exporting jwt in signjwt file
-
-exports.Login = (req, res, next) => {
-  if (req.body.email === "" || req.body.email.password === "") {
-    res.status(400).send("cannot be empty field");
-    return;
-  }
-  const email = req.body.email;
-  const password = req.body.password;
-
-  User.findOne({ email: email }, (err, user) => {
-    if (err) throw err;
-    const hashPassword = user.password;
-    bcrypt.compare(password, hashPassword, function (err, result) {
-      if (err) throw err;
-      if (result == true) {
-        let token = signJWT(user._id);
-        const data = { token: token, userId: user._id };
-        res.send(data);
-      } else {
-        res.status(404).send("Incorrect Password");
-      }
-    });
-  });
-  // let token = jwt.sign({ user: "vijender" }, process.env.JWT_SECRET);
-  // res.json(token);
-};
+const Leaves = require("../models/leaves");
 
 exports.HomePage = (req, res, next) => {
   res.json({ message: "login successful" });
 };
 
-exports.checkJWT = (req, res) => {
-  res.status(202).send({userId : req.user_id});
+exports.AddEmployee = (req, res) => {
+  console.log();
+  const empDetails = req.body.employee;
+  const hrId = req.body.userId;
+  const data = {
+    firstname: empDetails.firstname,
+    lastname: empDetails.lastname,
+    email: empDetails.email,
+    mobile: empDetails.mobile,
+    streetAdd: empDetails.streetAdd,
+    pincode: empDetails.pincode,
+    state: empDetails.state,
+    country: empDetails.country,
+    salary: empDetails.salary,
+    department: empDetails.department,
+  };
+  console.log(data);
+  const employee = new Employee(data);
+  User.findById(hrId)
+    .then(() => {
+      employee
+        .save()
+        .then((result) => {
+          console.log(result);
+          User.findByIdAndUpdate(
+            { _id: hrId },
+            { $push: { employees: result._id } }
+          )
+            .then(() => {
+              res.status(200).send("Employee Added Successfully");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          res.status(401).send("could not add the employee");
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      res.status(404).send("could not find the user id");
+      console.log(err);
+    });
+};
+
+exports.getUser = (req, res) => {
+  User.findById(req.user_id)
+    .populate("employees")
+    .then((user) => {
+      res.status(200).send(user.employees);
+    })
+    .catch((err) => {
+      res.status(404).send("Id not found in database");
+      console.log(err);
+    });
+};
+
+exports.editEmployee = (req, res) => {
+  const employee = req.body.employee;
+  const updateData = {
+    firstname: employee.firstname,
+    lastname: employee.lastname,
+    email: employee.email,
+    mobile: employee.mobile,
+    salary: employee.salary,
+    department: employee.department,
+    streetAdd: employee.streetAdd,
+    pincode: employee.pincode,
+    state: employee.state,
+    country: employee.country,
+  };
+  const userId = employee._id;
+  Employee.findByIdAndUpdate(userId, updateData)
+    .then(() => {
+      res.status(200).send("Successfully updated");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send("Failed to update");
+    });
+};
+
+exports.deleteEmployee = (req, res) => {
+  const userId = req.body.userId;
+  Employee.findByIdAndDelete(userId)
+    .then(() => {
+      res.status(200).send("Employee Deleted from database");
+    })
+    .catch((err) => console.log(err));
+};
+
+exports.addLeave = (req, res) => {
+  const emp_Id = req.body.emp_Id;
+  const leaveData = req.body.leaveData;
+  console.log(leaveData);
+  Employee.findById(emp_Id)
+    .then(() => {
+      const leave = new Leaves({
+        emp_Id: emp_Id,
+        reason: leaveData.reason,
+        date: leaveData.date,
+      });
+
+      leave
+        .save()
+        .then((result) => {
+          Employee.findByIdAndUpdate(
+            { _id: emp_Id },
+            { $push: { leaves: result._id } }
+          )
+            .then(() => {
+              console.log("leave ref added to employee collection");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log("could not save in leave database");
+        });
+    })
+    .catch((err) => {
+      console.log("could not find the employee in user Data");
+    });
 };

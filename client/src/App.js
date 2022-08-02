@@ -6,8 +6,10 @@ import LoginPage from "./components/login/LoginPage";
 import SignUpForm from "./components/signup/SignUpForm";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "./features/auth-slice";
-
+import { login, logout } from "./features/auth-slice";
+import AddEmployee from "./components/private/AddEmployee";
+import AllEmployee from "./components/private/AllEmployee";
+import Attendance from "./components/attendence/Attendance";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,7 +19,10 @@ function App() {
     axios
       .post("/auth/check", { authorization: clientToken })
       .then((response) => {
-        dispatch(login(response.data.userId))
+        dispatch(login(response.data.userId));
+      })
+      .catch((err) => {
+        dispatch(logout());
       });
   }
 
@@ -26,8 +31,26 @@ function App() {
     <div className="App">
       <Routes>
         <Route
+          path="/addEmployee"
+          element={
+            user ? <AddEmployee user={user} /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/employees"
+          element={
+            user ? <AllEmployee user={user} /> : <Navigate to="/login" />
+          }
+        />
+        <Route
           path="/"
           element={user ? <Home user={user} /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/attendance"
+          element={
+            user ? <Attendance user={user} /> : <Navigate to="/login" />
+          }
         />
         <Route path="/login" element={<LoginPage user={user} />} />
         <Route path="/signup" element={<SignUpForm user={user} />} />

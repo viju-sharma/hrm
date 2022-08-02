@@ -48,7 +48,6 @@ const SignUpForm = (props) => {
                     required
                     icon="user"
                     iconPosition="left"
-                    error={firstName === "" ? true : false}
                   />
                 </Form.Field>
               </Grid.Column>
@@ -56,6 +55,7 @@ const SignUpForm = (props) => {
                 <Form.Field>
                   <label>Last Name</label>
                   <Input
+                    type="text"
                     placeholder="Last Name"
                     value={lastName}
                     name="lastName"
@@ -63,7 +63,6 @@ const SignUpForm = (props) => {
                     required
                     icon="user"
                     iconPosition="left"
-                    error={lastName === "" ? true : false}
                   />
                 </Form.Field>
               </Grid.Column>
@@ -73,6 +72,7 @@ const SignUpForm = (props) => {
                 <Form.Field>
                   <label>Email</label>
                   <Input
+                    type="email"
                     placeholder="Your Email"
                     value={email}
                     name="email"
@@ -80,7 +80,6 @@ const SignUpForm = (props) => {
                     required
                     icon="at"
                     iconPosition="left"
-                    error={email === "" ? true : false}
                   />
                 </Form.Field>
               </Grid.Column>
@@ -88,6 +87,7 @@ const SignUpForm = (props) => {
                 <Form.Field>
                   <label>Password</label>
                   <Input
+                    type="password"
                     placeholder="Password"
                     value={password}
                     name="password"
@@ -95,7 +95,6 @@ const SignUpForm = (props) => {
                     required
                     icon="key"
                     iconPosition="left"
-                    error={password === "" ? true : false}
                   />
                 </Form.Field>
               </Grid.Column>
@@ -104,37 +103,38 @@ const SignUpForm = (props) => {
           <Grid columns={1}>
             <Grid.Row>
               <Grid.Column>
-                <Button animated="fade" primary size="big">
-                  <Button.Content visible>Sign up</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="signup" />
-                    Sign up
-                  </Button.Content>
-                </Button>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column>
-                <Link to="/login">
-                  <Button animated size="small">
-                    <Button.Content visible>
-                      <Icon name="arrow left" />
-                      Already Signed up ?
-                    </Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="signup" />
-                      Log In
-                    </Button.Content>
-                  </Button>
-                </Link>
+                <button
+                  className="ui animated fade button secondary medium"
+                  type="submit"
+                  tabIndex="0"
+                >
+                  <div className=" visible content">Sign Up</div>
+                  <div className="hidden content">
+                    {" "}
+                    <i className="user plus icon"></i>
+                  </div>
+                </button>
               </Grid.Column>
             </Grid.Row>
           </Grid>
         </Form>
+        <div className="ui horizontal divider">Or</div>
+        <Link to="/login">
+          <button
+            className="ui animated left button"
+            type="submit"
+            tabIndex="0"
+          >
+            <div className=" visible content">Already Have Account ?</div>
+            <div className="hidden content">
+              <i className="left arrow icon"></i>Login
+            </div>
+          </button>
+        </Link>
       </Container>
     );
   } else {
-    return <Navigate to='/'></Navigate>
+    return <Navigate to="/"></Navigate>;
   }
 };
 
