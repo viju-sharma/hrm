@@ -10,7 +10,6 @@ import { login, logout } from "./features/auth-slice";
 import AddEmployee from "./components/private/AddEmployee";
 import AllEmployee from "./components/private/AllEmployee";
 import Attendance from "./components/attendence/Attendance";
-
 function App() {
   const dispatch = useDispatch();
 
@@ -26,6 +25,7 @@ function App() {
       });
   }
 
+  const absentIDs = useSelector((state) => state.absentIDs.IDs);
   const user = useSelector((state) => state.auth.user);
   return (
     <div className="App">
@@ -49,7 +49,11 @@ function App() {
         <Route
           path="/attendance"
           element={
-            user ? <Attendance user={user} /> : <Navigate to="/login" />
+            user ? (
+              <Attendance absentIDs={absentIDs} user={user} />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
         />
         <Route path="/login" element={<LoginPage user={user} />} />

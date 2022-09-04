@@ -5,7 +5,7 @@ const leavesSchema = new Schema(
   {
     emp_Id: Schema.Types.ObjectId,
     date: {
-      type: Date,
+      type: String,
       required: true,
     },
     reason: {

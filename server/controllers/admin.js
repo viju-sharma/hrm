@@ -119,6 +119,7 @@ exports.addLeave = (req, res) => {
           )
             .then(() => {
               console.log("leave ref added to employee collection");
+              res.status(200).send("leave ref added to employee collection");
             })
             .catch((err) => {
               console.log(err);
@@ -126,9 +127,68 @@ exports.addLeave = (req, res) => {
         })
         .catch((err) => {
           console.log("could not save in leave database");
+          console.log(err);
         });
     })
     .catch((err) => {
       console.log("could not find the employee in user Data");
     });
+};
+
+exports.getAbsentToday = (req, res) => {
+  const today = new Date().toJSON().slice(0, 10).toString();
+  User.findById(req.user_id)
+    .populate({
+      path: "employees",
+      populate: {
+        path: "leaves",
+        model: "leaves",
+      },
+    })
+    .then((user) => {
+      const filteredEmployees = [];
+      user.employees.filter((employee) => {
+        employee.leaves.filter((leave) => {
+          if (leave.date == today) filteredEmployees.push(employee);
+        });
+      });
+
+      res.status(200).send(filteredEmployees);
+    })
+    .catch((err) => {
+      res.status(404).send("Id not found in database");
+      console.log(err);
+    });
+};
+
+exports.removeLeave = (req, res) => {
+  const emp_Id = req.body.emp_Id;
+  if (emp_Id) {
+    Employee.findById(emp_Id)
+      .populate("leaves")
+      .then((employees) => {
+        const leave = employees.leaves.filter((leave) => {
+          return leave.date == new Date().toJSON().slice(0, 10).toString();
+        });
+        if (leave.length > 0) {
+          Leaves.findByIdAndDelete(leave[0]._id)
+            .then((result) => {
+              Employee.updateOne(
+                { _id: emp_Id },
+                { $pull: { leaves: leave[0]._id } }
+              )
+                .then((result) => {
+                  console.log("leave removed from employee");
+                  res.status(200).send("leave removed");
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+  }
 };

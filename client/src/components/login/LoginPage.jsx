@@ -4,7 +4,6 @@ import "./loginpage.css";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/auth-slice";
-import { Button } from "semantic-ui-react";
 
 const LoginPage = (props) => {
   const [isErr, setErr] = useState("");
@@ -27,7 +26,6 @@ const LoginPage = (props) => {
       .then((response) => {
         response.status === 200 && dispatch(login(response.data.userId));
         sessionStorage.setItem("auth", `Bearer ${response.data.token}`);
-        console.log(response);
       })
       .catch((err) => {
         setErr("error");
@@ -41,9 +39,7 @@ const LoginPage = (props) => {
         {isErr && (
           <div className="ui error message">
             <div className="header">Incorrect Credentials</div>
-            <p>
-              Please check your email and Password
-            </p>
+            <p>Please check your email and Password</p>
           </div>
         )}
         <div className="ui form">

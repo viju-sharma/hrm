@@ -15,50 +15,66 @@ const Navigation = (props) => {
     dispatch(logout());
   };
 
-  return (<React.Fragment>
+  const searchValueChange = (e) => {
+    props.changedValue(e.target.value);
+  };
 
-    <div className="ui secondary  menu">
-      <Link to="/">
-        <div className={`item ${props.active === "home" && "active"}`}>
-          Home
-        </div>
-      </Link>
-      <Link to="/addEmployee">
-        <div className={`item ${props.active === "addemployee" && "active"}`}>
-          Add Employee
-        </div>
-      </Link>
-      <Link to="/employees">
-        <div className={`item ${props.active === "employees" && "active"}`}>
-          Employees
-        </div>
-      </Link>
-      <Link to="/attendance">
-        <div className={`item ${props.active === "attendance" && "active"}`}>
-          Attendance
-        </div>
-      </Link>
-      {!user && (
-        <Link to="/login">
-          <div className={`item ${props.active === "login" && "active"}`}>
-            Login
+  return (
+    <React.Fragment>
+      <div className="ui secondary  menu">
+        <Link to="/">
+          <div className={`item ${props.active === "home" && "active"}`}>
+            Home
           </div>
         </Link>
-      )}
-      {!user && (
-        <Link to="/signup">
-          <div className={`item ${props.active === "signup" && "active"}`}>
-            Signup
+        <Link to="/addEmployee">
+          <div className={`item ${props.active === "addemployee" && "active"}`}>
+            Add Employee
           </div>
         </Link>
-      )}
-      <div className="right menu">
-        <div className="item">
-          <i className="power off icon" onClick={logoutFun}></i>
+        <Link to="/employees">
+          <div className={`item ${props.active === "employees" && "active"}`}>
+            Employees
+          </div>
+        </Link>
+        <Link to="/attendance">
+          <div className={`item ${props.active === "attendance" && "active"}`}>
+            Attendance
+          </div>
+        </Link>
+        {!user && (
+          <Link to="/login">
+            <div className={`item ${props.active === "login" && "active"}`}>
+              Login
+            </div>
+          </Link>
+        )}
+        {!user && (
+          <Link to="/signup">
+            <div className={`item ${props.active === "signup" && "active"}`}>
+              Signup
+            </div>
+          </Link>
+        )}
+        {props.active === "attendance" && (
+          <div className="ui icon input">
+            <input
+              type="text"
+              value={props.searchValue}
+              onChange={searchValueChange}
+              placeholder="Search..."
+            />
+            <i className="search link icon"></i>
+          </div>
+        )}
+        <div className="right menu">
+          <div className="item" onClick={logoutFun}>
+            <i className="power off icon"></i>
+            <div>Logout</div>
+          </div>
         </div>
       </div>
-    </div>
-  </React.Fragment>
+    </React.Fragment>
   );
 };
 
