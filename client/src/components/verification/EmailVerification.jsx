@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 const VerifyAccount = () => {
   const [loading, setLoading] = useState(false);
 
@@ -16,9 +16,20 @@ const VerifyAccount = () => {
       .then((response) => {
         console.log(response);
         setLoading(false);
+        setServerRes({
+          type: "success",
+          message:
+            "Your email is verified successfully, You can close this tab",
+          header: response.data.message,
+        });
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err.response.data.message);
+        setServerRes({
+          type: "failed",
+          message: "Are you Lost ? Click below to Login",
+          header: err.response.data.message,
+        });
         setLoading(false);
       });
   }, []);
@@ -32,13 +43,15 @@ const VerifyAccount = () => {
       </div>
     </div>
   ) : (
-    <div class="ui massive message">
-      <div class="header">Changes in Service</div>
-      <p>
-        We just updated our privacy policy here to better service our customers.
-        We recommend reviewing the changes.
-      </p>
-    </div>
+    serverRes && (
+      <div className="ui massive message">
+        <div className="header">{serverRes.header}</div>
+        <p>{serverRes.message}</p>
+        <Link to="/">
+          <button className="ui button purple">Move to Login Page</button>
+        </Link>
+      </div>
+    )
   );
 };
 

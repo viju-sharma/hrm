@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { Form, Input, Grid, Button, Icon, Container } from "semantic-ui-react";
+import {
+  Form,
+  Input,
+  Grid,
+  Button,
+  Icon,
+  Container,
+  Message,
+} from "semantic-ui-react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "../../features/auth-slice";
 
 const SignUpForm = (props) => {
   const user = props.user;
+  const [loading, setLoading] = useState(false);
+  const [serverRes, setServerRes] = useState();
 
-  const dispatch = useDispatch();
   const [initalValue, setValues] = useState({
     firstName: "",
     lastName: "",
@@ -20,20 +27,51 @@ const SignUpForm = (props) => {
     const name = e.target.name;
     const value = e.target.value;
     setValues((values) => ({ ...values, [name]: value }));
+    setServerRes(null);
   };
 
   let { firstName, lastName, email, password } = initalValue;
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post("/auth/signup", initalValue).then((response) => {
-      response.status === 201 && dispatch(login(response.data.userId));
-      console.log(response);
-      sessionStorage.setItem("auth", `Bearer ${response.data.token}`);
-    });
+    setLoading(true);
+    axios
+      .post("/auth/signup", initalValue)
+      .then((response) => {
+        setLoading(false);
+        setServerRes({
+          type: "success",
+          header: "Email sent",
+          message: response.data.message,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        if (err.response.status === 406) {
+          setServerRes({
+            type: "failed",
+            header: "Account aleady exists",
+            message: err.response.data.message,
+          });
+          return setLoading(false);
+        }
+        setServerRes({
+          type: "failed",
+          header: "Error occured",
+          message: err.response.data.message,
+        });
+        setLoading(false);
+      });
   };
   if (!user) {
     return (
       <Container text>
+        {serverRes && (
+          <Message
+            warning
+            header={serverRes.header}
+            content={serverRes.message}
+          />
+        )}
         <Form onSubmit={handleSubmit}>
           <Grid columns={2}>
             <Grid.Row>
@@ -103,17 +141,9 @@ const SignUpForm = (props) => {
           <Grid columns={1}>
             <Grid.Row>
               <Grid.Column>
-                <button
-                  className="ui animated fade button secondary medium"
-                  type="submit"
-                  tabIndex="0"
-                >
-                  <div className=" visible content">Sign Up</div>
-                  <div className="hidden content">
-                    {" "}
-                    <i className="user plus icon"></i>
-                  </div>
-                </button>
+                <Button secondary type="submit" loading={loading}>
+                  Sign Up
+                </Button>
               </Grid.Column>
             </Grid.Row>
           </Grid>

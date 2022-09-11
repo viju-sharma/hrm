@@ -11,14 +11,14 @@ exports.Verify = async (req, res) => {
   console.log(req.params);
   try {
     const user = await User.findOne({ _id: req.params.id });
-    if (!user) return res.status(400).send({ message: "invalid link" });
+    if (!user) return res.status(400).send({ message: "Invalid Link" });
 
     const token = await Token.findOne({
       userId: user.id,
       token: req.params.token,
     });
 
-    if (!token) return res.status(400).send({ message: "invalid link" });
+    if (!token) return res.status(400).send({ message: "Invalid Link" });
 
     await User.findByIdAndUpdate(user.id, { verified: true });
     await token.remove();
@@ -32,12 +32,18 @@ exports.Verify = async (req, res) => {
 
 exports.Signup = (req, res, next) => {
   const saltRounds = 10;
-  bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+  bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
     if (err) return err;
     const password = hash;
     const firstname = req.body.firstName;
     const lastname = req.body.lastName;
     const email = req.body.email;
+    const isUserExists = await User.findOne({ email });
+    if (isUserExists)
+      return res
+        .status(406)
+        .send({ message: `Account already exists with the email : ${email}` });
+
     const user = new User({ firstname, lastname, email, password });
     user
       .save()
