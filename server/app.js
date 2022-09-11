@@ -22,12 +22,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/auth", authRoutes);
 app.use("/employee", adminRoutes);
-app.use("/user", adminRoutes)
+app.use("/user", adminRoutes);
 mongoose
   .connect(process.env.MONGODB_CLUSTER)
   .then((result) => {
     console.log("database connected");
-    app.listen(process.env.PORT || 3001, () => {
+    app.listen(process.env.PORT || 5000, () => {
       console.log("server is spinning on port " + process.env.PORT);
     });
   })

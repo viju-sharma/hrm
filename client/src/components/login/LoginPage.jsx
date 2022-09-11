@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import "./loginpage.css";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/auth-slice";
+import classes from "./Loginpage.module.css";
 
 const LoginPage = (props) => {
-  const [isErr, setErr] = useState("");
+  const [isErr, setErr] = useState();
   const dispatch = useDispatch();
   const user = props.user;
   const [initialValue, setValues] = useState({ email: "a@a.a", password: "a" });
@@ -28,24 +28,51 @@ const LoginPage = (props) => {
         sessionStorage.setItem("auth", `Bearer ${response.data.token}`);
       })
       .catch((err) => {
-        setErr("error");
+        const message = err.response.data.message
+          ? err.response.data.message
+          : "unknown error";
+        if (err.response.status === 400) {
+          setErr({
+            type: "medium",
+            header: "Account Verification Required ",
+            message: message,
+          });
+        } else if (err.response.status === 404) {
+          setErr({
+            type: "critical",
+            header: "Incorrect Credentials",
+            message: message,
+          });
+        } else {
+          setErr({
+            type: "critical",
+            header: "System Error",
+            message: message,
+          });
+        }
         setValues({ email: "", password: "" });
-        console.log("from me " + err);
       });
   };
   if (!user) {
     return (
-      <div className="ui segment placeholder" id="loginForm">
+      <div
+        className={`ui segment placeholder ${classes.loginForm}`}
+        id={classes.loginForm}
+      >
         {isErr && (
-          <div className="ui error message">
-            <div className="header">Incorrect Credentials</div>
-            <p>Please check your email and Password</p>
+          <div
+            className={`ui ${
+              isErr.type === "medium" ? "purple" : "red"
+            } message`}
+          >
+            <div className="header">{isErr.header}</div>
+            <p>{isErr.message}</p>
           </div>
         )}
         <div className="ui form">
           <form onSubmit={handleSubmit}>
             <div className="field">
-              <label>Username</label>
+              <label className={classes.label}>Username</label>
               <div className={`ui left icon input ${isErr}`}>
                 <input
                   type="email"
@@ -59,7 +86,7 @@ const LoginPage = (props) => {
               </div>
             </div>
             <div className="field">
-              <label>Password</label>
+              <label className={classes.label}>Password</label>
               <div className={`ui left icon input ${isErr}`}>
                 <input
                   type="password"
@@ -77,7 +104,7 @@ const LoginPage = (props) => {
             </button>
           </form>
         </div>
-        <div className="ui horizontal divider">Or</div>
+        <div className={`ui horizontal divider ${classes.divider}`}>Or</div>
         <Link to="/signup">
           <div className="ui animated fade button" tabIndex="0">
             <div className="visible content">Don't have account ?</div>

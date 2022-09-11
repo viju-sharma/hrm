@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 const usersSchema = new Schema(
   {
-    _id: {
-      type: mongoose.ObjectId,
-      required: true,
-    },
     firstname: {
       type: String,
       required: true,
@@ -18,6 +14,7 @@ const usersSchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -29,6 +26,7 @@ const usersSchema = new Schema(
         ref: "employee",
       },
     ],
+    verified: { type: Boolean, default: false },
   },
   {
     timestamps: true,

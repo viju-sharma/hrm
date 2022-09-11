@@ -10,6 +10,7 @@ import { login, logout } from "./features/auth-slice";
 import AddEmployee from "./components/private/AddEmployee";
 import AllEmployee from "./components/private/AllEmployee";
 import Attendance from "./components/attendence/Attendance";
+import VerifyAccount from "./components/verification/EmailVerification";
 function App() {
   const dispatch = useDispatch();
 
@@ -30,6 +31,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/users/:id/verify/:token" element={<VerifyAccount />} />
         <Route
           path="/addEmployee"
           element={

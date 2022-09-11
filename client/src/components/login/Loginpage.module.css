@@ -1,0 +1,12 @@
+#loginForm{
+    background-color: #282c34;
+    min-height: 100vh;
+}
+.label{
+    color : #fff !important;
+}
+
+.divider::before{
+    background-color: unset !important;
+
+}
