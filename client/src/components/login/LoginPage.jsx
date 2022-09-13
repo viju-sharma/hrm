@@ -53,6 +53,8 @@ const LoginPage = (props) => {
         setValues({ email: "", password: "" });
       });
   };
+
+  const showForgotPassword = () => {};
   if (!user) {
     return (
       <div
@@ -103,6 +105,9 @@ const LoginPage = (props) => {
               Login
             </button>
           </form>
+          <div className={classes.forgotPassword} onClick={showForgotPassword}>
+            <p>forgot password?</p>
+          </div>
         </div>
         <div className={`ui horizontal divider ${classes.divider}`}>Or</div>
         <Link to="/signup">

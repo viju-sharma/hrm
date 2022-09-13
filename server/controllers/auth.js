@@ -6,29 +6,7 @@ const Token = require("../models/token");
 const crypto = require("crypto");
 const sendEmail = require("../utils/mail");
 
-//verify token for sign up
-exports.Verify = async (req, res) => {
-  console.log(req.params);
-  try {
-    const user = await User.findOne({ _id: req.params.id });
-    if (!user) return res.status(400).send({ message: "Invalid Link" });
 
-    const token = await Token.findOne({
-      userId: user.id,
-      token: req.params.token,
-    });
-
-    if (!token) return res.status(400).send({ message: "Invalid Link" });
-
-    await User.findByIdAndUpdate(user.id, { verified: true });
-    await token.remove();
-
-    res.status(200).send({ message: "email verified successfully" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "internal server error" });
-  }
-};
 
 exports.Signup = (req, res, next) => {
   const saltRounds = 10;
@@ -85,7 +63,7 @@ exports.Login = async (req, res, next) => {
 
     const validPassword = await bcrypt.compare(password, hashPassword);
     if (!validPassword)
-      return res.status(404).send({ message: "Account does not exist" });
+      return res.status(404).send({ message: "Invalid usernamee or password" });
 
     if (!user.verified) {
       let token = await Token.findOne({ userId: user._id });

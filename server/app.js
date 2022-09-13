@@ -9,6 +9,8 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
+const verificationRoutes = require("./routes/verification");
+
 const { ObjectId } = require("mongodb");
 
 require("dotenv").config();
@@ -20,6 +22,7 @@ app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use("/verify", verificationRoutes);
 app.use("/auth", authRoutes);
 app.use("/employee", adminRoutes);
 app.use("/user", adminRoutes);

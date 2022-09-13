@@ -28,7 +28,7 @@ const protect = async (req, res, next) => {
               }
             })
             .catch((err) => {
-              cosole.log("from protect page " + err);
+              console.log("from protect page " + err);
             });
         }
       });

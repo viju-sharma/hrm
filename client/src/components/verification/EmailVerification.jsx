@@ -12,7 +12,7 @@ const VerifyAccount = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`/auth/${id}/verify/${token}`)
+      .get(`/verify/${id}/verify/${token}`)
       .then((response) => {
         console.log(response);
         setLoading(false);
