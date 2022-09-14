@@ -68,7 +68,7 @@ const Navigation = (props) => {
           </div>
         )}
         <div className="right menu">
-          <div className="item" onClick={logoutFun}>
+          <div className="item cursorPointer" onClick={logoutFun}>
             <i className="power off icon"></i>
             <div>Logout</div>
           </div>

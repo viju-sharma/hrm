@@ -1,16 +1,25 @@
 #loginForm{
-    background-color: #282c34;
     min-height: 100vh;
+    background : linear-gradient(#42275a,#734b6d)
 }
 .label{
-    color : #fff !important;
+    /* color : #fff !important; */
 }
 
 .divider::before{
-    background-color: unset !important;
+    /* background-color: unset !important; */
 
 }
 .forgotPassword{
     margin :2rem auto auto ;
-    color : white !important
+}
+
+.loginBlock{
+    background: linear-gradient(#007377, #63edff);
+    box-shadow: 0 1px;
+    border-radius: 50% 20% / 10% 40%;
+    width: 50%;
+    margin : auto;
+    padding : 5rem;
+
 }

@@ -46,6 +46,16 @@ exports.ChangePassword = async (req, res, next) => {
 };
 
 //when user click forget password
+// "/verify/forgetPassword"
 exports.forgotPassword = async (req, res, next) => {
-  console.log(req.body);
+  setTimeout(async () => {
+    const user = await User.findOne({ email: req.body.email });
+    console.log(user);
+    if (!user)
+      return res.status(404).send({ message: "Account Does Not Exists !!!" });
+    return res
+      .status(200)
+      .send({ message: "An Email has been sent to recover your Password..." });
+  }, 2000);
+  // all working is remaining to send a mail to user
 };
