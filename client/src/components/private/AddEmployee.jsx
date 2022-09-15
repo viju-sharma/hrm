@@ -32,10 +32,9 @@ const AddEmployee = (props) => {
   };
   const user = props.user;
   const clientToken = sessionStorage.getItem("auth");
-
+  const config = { headers: { authorization: clientToken } };
   const postData = {
     employee: initialValue,
-    authorization: clientToken,
     userId: user,
   };
 
@@ -56,7 +55,7 @@ const AddEmployee = (props) => {
       alert("Please fill all details");
     } else {
       e.preventDefault();
-      axios.post("/employee/addEmployee", postData).then((response) => {
+      axios.post("/employee/addEmployee", postData, config).then((response) => {
         if (response.status === 200) {
           setAdded(true);
           setValues(emptyField);
@@ -69,7 +68,7 @@ const AddEmployee = (props) => {
 
   return (
     <React.Fragment>
-      <Navigation active="addemployee"/>
+      <Navigation active="addemployee" />
       <Container>
         {isAdded && (
           <div className="ui success message">
@@ -90,6 +89,7 @@ const AddEmployee = (props) => {
             <div className="two fields">
               <div className="field">
                 <input
+                  autoFocus
                   type="text"
                   name="firstname"
                   placeholder="First Name"

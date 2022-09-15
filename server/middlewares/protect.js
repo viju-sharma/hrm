@@ -2,13 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const protect = async (req, res, next) => {
   // console.log(req)
-  let authorization = "";
-  if (req.body.authorization && req.body.authorization.startsWith("Bearer")) {
-    authorization = req.body.authorization;
-  }
-  if (req.query.authorization && req.query.authorization.startsWith("Bearer")) {
-    authorization = req.query.authorization;
-  }
+  const authorization = req.headers.authorization;
   if (authorization && authorization.startsWith("Bearer")) {
     try {
       const token = authorization.split(" ")[1];

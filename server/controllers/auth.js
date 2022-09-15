@@ -28,10 +28,10 @@ exports.Signup = (req, res, next) => {
       .then(async (item) => {
         const _Id = item._id;
         const token = await new Token({
-          userId: user._id,
+          userId: _Id,
           token: crypto.randomBytes(32).toString("hex"),
         }).save();
-        const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
+        const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
         await sendEmail(user.email, "Verify Email", url);
         res
           .status(201)
@@ -72,7 +72,7 @@ exports.Login = async (req, res, next) => {
           userId: user._id,
           token: crypto.randomBytes(32).toString("hex"),
         }).save();
-        const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
+        const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
         await sendEmail(user.email, "Verify Email", url);
       }
       console.log("email sent");

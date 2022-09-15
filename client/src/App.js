@@ -11,13 +11,15 @@ import AddEmployee from "./components/private/AddEmployee";
 import AllEmployee from "./components/private/AllEmployee";
 import Attendance from "./components/attendence/Attendance";
 import VerifyAccount from "./components/verification/EmailVerification";
+import PasswordRecovery from "./components/PasswordRecovery/PasswordRecovery";
 function App() {
   const dispatch = useDispatch();
 
   let clientToken = sessionStorage.getItem("auth");
+  const config = { headers: { authorization: clientToken } };
   if (clientToken) {
     axios
-      .post("/auth/check", { authorization: clientToken })
+      .post("/auth/check", {}, config)
       .then((response) => {
         dispatch(login(response.data.userId));
       })
@@ -31,7 +33,6 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/users/:id/verify/:token" element={<VerifyAccount />} />
         <Route
           path="/addEmployee"
           element={
@@ -60,6 +61,11 @@ function App() {
         />
         <Route path="/login" element={<LoginPage user={user} />} />
         <Route path="/signup" element={<SignUpForm user={user} />} />
+        <Route path="/users/:id/verify/:token" element={<VerifyAccount />} />
+        <Route
+          path="/forgotPassword/:id/verify/:token/user/:email"
+          element={<PasswordRecovery />}
+        />
       </Routes>
     </div>
   );

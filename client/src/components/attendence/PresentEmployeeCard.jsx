@@ -16,14 +16,15 @@ const PresentEmployeeCard = (props) => {
   // });
   const searchValue = props.searchValue;
 
-  const changeStatus = useSelector((state) => {
-    return state.attendance;
-  });
+  // const changeStatus = useSelector((state) => {
+  //   return state.attendance;
+  // });
 
   useEffect(() => {
     // getAllEmployees
+    const config = { headers: { authorization: clientToken } };
     axios
-      .get("/user/getUser", { params: { authorization: clientToken } })
+      .get("/user/getUser", config)
       .then((result) => {
         setEmployees(result.data);
       })
@@ -52,8 +53,9 @@ const PresentEmployeeCard = (props) => {
     };
 
     const addLeave = () => {
+      const config = { headers: { authorization: clientToken } };
       axios
-        .post("/employee/addLeave", postData)
+        .post("/employee/addLeave", postData, config)
         .then((result) => {
           dispatch(isChanged());
         })

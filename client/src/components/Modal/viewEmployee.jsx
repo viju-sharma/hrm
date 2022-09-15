@@ -32,12 +32,15 @@ const ViewEmployee = (props) => {
   };
 
   const handleDelete = () => {
-    console.log(employee._id);
+    const config = { headers: { authorization: clientToken } };
     axios
-      .post("/employee/deleteEmployee", {
-        authorization: clientToken,
-        userId: employee._id,
-      })
+      .post(
+        "/employee/deleteEmployee",
+        {
+          userId: employee._id,
+        },
+        config
+      )
       .then(() => {
         props.updated();
         setSecondOpen(false);
@@ -64,19 +67,21 @@ const ViewEmployee = (props) => {
     ) {
       alert("Please fill all details");
     } else {
+      const config = { headers: { authorization: clientToken } };
       const postData = {
         employee: initialValues,
-        authorization: clientToken,
       };
       e.preventDefault();
-      axios.post("/employee/editEmployee", postData).then((response) => {
-        if (response.status === 200) {
-          setAdded(true);
-          props.updated();
-        } else {
-          setFailed(true);
-        }
-      });
+      axios
+        .post("/employee/editEmployee", postData, config)
+        .then((response) => {
+          if (response.status === 200) {
+            setAdded(true);
+            props.updated();
+          } else {
+            setFailed(true);
+          }
+        });
     }
   };
 

@@ -21,8 +21,9 @@ const AbsentEmployeeCard = (props) => {
 
   useEffect(() => {
     // get absentEmployees
+    const config = { headers: { authorization: clientToken } };
     axios
-      .get("/user/getAbsentToday", { params: { authorization: clientToken } })
+      .get("/user/getAbsentToday", config)
       .then((result) => {
         setAbsentEmployees(result.data);
       })

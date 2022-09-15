@@ -3,8 +3,8 @@ const User = require("../models/user");
 const { ObjectId } = require("mongodb");
 const signJWT = require("../middlewares/signJwt");
 const Token = require("../models/token");
-// const crypto = require("crypto");
-// const sendEmail = require("../utils/mail");
+const crypto = require("crypto");
+const sendEmail = require("../utils/mail");
 
 //verify token for sign up
 exports.Verify = async (req, res) => {
@@ -49,13 +49,37 @@ exports.ChangePassword = async (req, res, next) => {
 // "/verify/forgetPassword"
 exports.forgotPassword = async (req, res, next) => {
   setTimeout(async () => {
-    const user = await User.findOne({ email: req.body.email });
-    console.log(user);
-    if (!user)
-      return res.status(404).send({ message: "Account Does Not Exists !!!" });
-    return res
-      .status(200)
-      .send({ message: "An Email has been sent to recover your Password..." });
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      // if user does not exist then return here
+      if (!user)
+        return res.status(404).send({ message: "Account Does Not Exists !!!" });
+
+      // check if a token is already created within one hour, if token already exists in then use this token
+      let token = await Token.findOne({ userId: user._id });
+
+      // if token doesn't exist then create one here
+      if (!token) {
+        const _Id = user._id;
+        token = await new Token({
+          userId: _Id,
+          token: crypto.randomBytes(32).toString("hex"),
+        }).save();
+      }
+
+      // this url will be sent on the user's email address to recover his password
+      const url = `${process.env.BASE_URL}/forgotPassword/${user._id}/verify/${token.token}/user/${req.body.email}`;
+
+      await sendEmail(req.body.email, "Recover Password", url);
+
+      return res.status(200).send({
+        message: "An Email has been sent to recover your Password...",
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: "Unkown Error Occured. Please wait for sometime and try again",
+      });
+      console.log(error);
+    }
   }, 2000);
-  // all working is remaining to send a mail to user
 };

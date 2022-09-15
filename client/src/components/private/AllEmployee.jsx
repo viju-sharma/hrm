@@ -18,11 +18,10 @@ const AllEmployee = (props) => {
 
   const [employeeSelected, setEmployee] = useState();
   useEffect(() => {
-    axios
-      .get("/user/getUser", { params: { authorization: clientToken } })
-      .then((result) => {
-        setEmployees(result.data);
-      });
+    const config = { headers: { authorization: clientToken } };
+    axios.get("/user/getUser", config).then((result) => {
+      setEmployees(result.data);
+    });
   }, [clientToken, isUpdated]);
 
   // let navigate = useNavigate();
