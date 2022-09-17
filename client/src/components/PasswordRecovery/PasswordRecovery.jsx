@@ -7,7 +7,7 @@ import classes from "./PasswordRecovery.module.css";
 const PasswordRecovery = () => {
   document.title = "Change Password";
   const params = useParams();
-  const { id, email } = params;
+  const { id, email, token } = params;
 
   const [isError, setIsError] = useState(false);
 
@@ -25,7 +25,20 @@ const PasswordRecovery = () => {
   };
 
   const handleSubmit = async () => {
-    const response = axios.post("");
+    if (inputValue.input1 === "" || inputValue.input2 === "")
+      return setIsError(true);
+    if (inputValue.input1 !== inputValue.input2) return setIsError(true);
+    try {
+      const response = await axios.post("/verify/changePassword", {
+        id,
+        token,
+        password: inputValue.input1,
+      });
+
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

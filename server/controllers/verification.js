@@ -5,7 +5,7 @@ const signJWT = require("../middlewares/signJwt");
 const Token = require("../models/token");
 const crypto = require("crypto");
 const sendEmail = require("../utils/mail");
-
+const bcrypt = require("bcrypt");
 //verify token for sign up
 exports.Verify = async (req, res) => {
   console.log(req.params);
@@ -31,18 +31,30 @@ exports.Verify = async (req, res) => {
 };
 
 exports.ChangePassword = async (req, res, next) => {
-  console.log(req.params);
+  console.log(req.body);
+  const { id, token, password } = req.body;
+
   try {
-    const user = await User.findOne({ _id: req.params.id });
+    const user = await User.findOne({ id });
     if (!user) return res.status(400).send({ message: "Invalid Link" });
 
     const token = await Token.findOne({
       userId: user.id,
-      token: req.params.token,
+      token,
     });
 
     if (!token) return res.status(400).send({ message: "Invalid Link" });
-  } catch (error) {}
+    const saltRounds = 10;
+    bcrypt.hash(password, saltRounds, async (err, hash) => {
+      // Store hash in your password DB.
+      if (err) return err;
+      await User.findByIdAndUpdate(id, { password: hash });
+      await token.remove();
+      res.status(200).send({ message: "Password Changed Successfully" });
+    });
+  } catch (error) {
+    res.status(500).send({ message: "internal server error" });
+  }
 };
 
 //when user click forget password
