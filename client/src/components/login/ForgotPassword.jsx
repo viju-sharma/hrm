@@ -31,7 +31,16 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    if (regex.test(recoveryEmail) === false) return setError(true);
+    if (regex.test(recoveryEmail) === false) {
+      setMessage({
+        icon: "exclamation circle",
+        color: "red",
+        type: "failure",
+        title: "Invalid Email",
+        message: "Please Enter a Valid Email Address",
+      });
+      return setError(true);
+    }
     try {
       setLoading(true);
       const response = await axios.post("/verify/forgetPassword", {
@@ -44,6 +53,7 @@ function ForgotPassword() {
         title: "Successful",
         message: response.data.message,
       });
+      setRecoveryEmail("");
       setLoading(false);
     } catch (error) {
       setError(true);
