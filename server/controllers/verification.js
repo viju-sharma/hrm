@@ -38,14 +38,16 @@ exports.ChangePassword = async (req, res, next) => {
     const user = await User.findOne({ id });
     if (!user)
       return res.status(400).send({ title: "Failed", message: "Invalid Link" });
-
     const token = await Token.findOne({
-      userId: user.id,
+      userId: id,
       token: clientToken,
     });
 
+    console.log(token);
     if (!token)
-      return res.status(400).send({ title: "Failed", message: "Invalid Link" });
+      return res
+        .status(400)
+        .send({ title: "Failed", message: "Invalid Link" });
     const saltRounds = 10;
     bcrypt.hash(password, saltRounds, async (err, hash) => {
       // Store hash in your password DB.
