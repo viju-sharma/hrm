@@ -67,6 +67,7 @@ function ForgotPassword() {
 
   return (
     <Modal
+      dimmer="blurring"
       className={classes.modal}
       basic
       onClose={() => setOpen(false)}

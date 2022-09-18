@@ -32,28 +32,34 @@ exports.Verify = async (req, res) => {
 
 exports.ChangePassword = async (req, res, next) => {
   console.log(req.body);
-  const { id, token, password } = req.body;
+  const { id, clientToken, password } = req.body;
 
   try {
     const user = await User.findOne({ id });
-    if (!user) return res.status(400).send({ message: "Invalid Link" });
+    if (!user)
+      return res.status(400).send({ title: "Failed", message: "Invalid Link" });
 
     const token = await Token.findOne({
       userId: user.id,
-      token,
+      token: clientToken,
     });
 
-    if (!token) return res.status(400).send({ message: "Invalid Link" });
+    if (!token)
+      return res.status(400).send({ title: "Failed", message: "Invalid Link" });
     const saltRounds = 10;
     bcrypt.hash(password, saltRounds, async (err, hash) => {
       // Store hash in your password DB.
       if (err) return err;
       await User.findByIdAndUpdate(id, { password: hash });
       await token.remove();
-      res.status(200).send({ message: "Password Changed Successfully" });
+      res.status(200).send({
+        title: "Successful",
+        message: "Password Changed Successfully",
+      });
     });
   } catch (error) {
-    res.status(500).send({ message: "internal server error" });
+    console.log(error.message);
+    res.status(500).send({ title: "Failed", message: "internal server error" });
   }
 };
 
