@@ -12,5 +12,6 @@ router.post("/check", protect, authController.checkJWT);
 //
 router.post("/login", authController.Login);
 
+router.post("/logout", protect, authController.logout);
 
 module.exports = router;

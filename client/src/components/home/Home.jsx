@@ -13,7 +13,6 @@ const Home = () => {
         <button
           className="ui button secondary"
           onClick={() => {
-            sessionStorage.clear();
             dispatch(logout());
           }}
         >

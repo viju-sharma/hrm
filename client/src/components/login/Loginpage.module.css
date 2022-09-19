@@ -3,7 +3,8 @@
     background : linear-gradient(#42275a,#734b6d)
 }
 .label{
-    /* color : #fff !important; */
+    color : rgb(255, 255, 255) !important;
+    float : left
 }
 
 .divider::before{
@@ -22,4 +23,15 @@
     margin : auto;
     padding : 5rem;
 
+}
+
+.loginBlock input {
+    width: 10rem;
+}
+
+@media only screen and (max-width: 700px) {
+  .loginBlock{
+    width: 100%;
+    padding : 1rem;
+  }
 }

@@ -90,31 +90,13 @@ exports.Login = async (req, res, next) => {
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });
   }
-
-  // User.findOne({ email: email })
-  //   .then((user) => {
-  //     const hashPassword = user.password;
-  //     bcrypt
-  //       .compare(password, hashPassword)
-  //       .then((result) => {
-  //         // if password is correct for the same user
-  //         if (result == true) {
-  //           let token = signJWT(user._id);
-  //           const data = { token: token, userId: user._id };
-  //           res.send(data);
-  //         } else {
-  //           res.status(404).send("Incorrect Password");
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   })
-  //   .catch((err) => {
-  //     res.status(404).send("user not found");
-  //   });
 };
 
 exports.checkJWT = (req, res) => {
   res.status(202).send({ userId: req.user_id });
+};
+
+exports.logout = async (req, res) => {
+  res.clearCookie(`${req.user_id}`);
+  return res.status(201).send({ message: "Logged Out Succesfully" });
 };

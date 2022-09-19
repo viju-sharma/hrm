@@ -11,7 +11,7 @@ const LoginPage = (props) => {
   const dispatch = useDispatch();
   const user = props.user;
   const [initialValue, setValues] = useState({
-    email: "vijendersharma47@gmail.com",
+    email: "testing@gmail.com",
     password: "testing12345",
   });
 
@@ -29,7 +29,6 @@ const LoginPage = (props) => {
       .post("/auth/login", initialValue)
       .then((response) => {
         response.status === 200 && dispatch(login(response.data.userId));
-        sessionStorage.setItem("auth", `Bearer ${response.data.token}`);
       })
       .catch((err) => {
         const message = err.response.data.message
