@@ -2,10 +2,11 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const protect = async (req, res, next) => {
   // console.log(req)
-  const authorization = req.headers.authorization;
-  if (authorization && authorization.startsWith("Bearer")) {
+  const cookies = req.headers.cookie;
+
+  if (cookies) {
     try {
-      const token = authorization.split(" ")[1];
+      const token = cookies.split("=")[1];
       jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
           console.log(err);

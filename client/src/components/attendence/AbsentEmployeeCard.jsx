@@ -13,7 +13,6 @@ const AbsentEmployeeCard = (props) => {
   const dispatch = useDispatch();
   const [absentEmployees, setAbsentEmployees] = useState([]);
 
-  const clientToken = sessionStorage.getItem("auth");
 
   const searchValue = props.searchValue;
 
@@ -21,16 +20,15 @@ const AbsentEmployeeCard = (props) => {
 
   useEffect(() => {
     // get absentEmployees
-    const config = { headers: { authorization: clientToken } };
     axios
-      .get("/user/getAbsentToday", config)
+      .get("/user/getAbsentToday")
       .then((result) => {
         setAbsentEmployees(result.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [clientToken, changeStatus]);
+  }, [changeStatus]);
 
   useEffect(() => {
     const absentID = [];

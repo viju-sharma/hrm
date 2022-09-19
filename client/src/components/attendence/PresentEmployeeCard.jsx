@@ -9,7 +9,6 @@ const PresentEmployeeCard = (props) => {
   const dispatch = useDispatch();
   const [Employees, setEmployees] = useState([]);
 
-  const clientToken = sessionStorage.getItem("auth");
   const absentIDs = props.absentIDs;
   // useSelector((state) => {
   //   return state.absentIDs.IDs;
@@ -22,16 +21,15 @@ const PresentEmployeeCard = (props) => {
 
   useEffect(() => {
     // getAllEmployees
-    const config = { headers: { authorization: clientToken } };
     axios
-      .get("/user/getUser", config)
+      .get("/user/getUser")
       .then((result) => {
         setEmployees(result.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [clientToken]);
+  }, []);
 
   const EmployeesItems = Employees.filter(
     (employee) =>
@@ -48,14 +46,12 @@ const PresentEmployeeCard = (props) => {
         lastname: employee.lastname,
         department: employee.department,
       },
-      authorization: clientToken,
       emp_Id: employee._id,
     };
 
     const addLeave = () => {
-      const config = { headers: { authorization: clientToken } };
       axios
-        .post("/employee/addLeave", postData, config)
+        .post("/employee/addLeave", postData)
         .then((result) => {
           dispatch(isChanged());
         })

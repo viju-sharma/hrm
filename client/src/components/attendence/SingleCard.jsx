@@ -6,17 +6,15 @@ import { isChanged } from "../../features/attendence-slice";
 const SingleCard = (props) => {
   const dispatch = useDispatch();
 
-  const clientToken = sessionStorage.getItem("auth");
 
   const removeLeave = () => {
-    const config = { headers: { authorization: clientToken } };
     axios
       .post(
         "/employee/removeLeave",
         {
           emp_Id: props.emp_Id,
         },
-        config
+        
       )
       .then((result) => {
         dispatch(isChanged());

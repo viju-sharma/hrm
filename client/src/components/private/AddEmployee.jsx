@@ -31,8 +31,6 @@ const AddEmployee = (props) => {
     setValues((values) => ({ ...values, [name]: value }));
   };
   const user = props.user;
-  const clientToken = sessionStorage.getItem("auth");
-  const config = { headers: { authorization: clientToken } };
   const postData = {
     employee: initialValue,
     userId: user,
@@ -55,7 +53,7 @@ const AddEmployee = (props) => {
       alert("Please fill all details");
     } else {
       e.preventDefault();
-      axios.post("/employee/addEmployee", postData, config).then((response) => {
+      axios.post("/employee/addEmployee", postData).then((response) => {
         if (response.status === 200) {
           setAdded(true);
           setValues(emptyField);

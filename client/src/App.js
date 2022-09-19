@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Home from "./components/home/Home";
@@ -15,18 +16,16 @@ import PasswordRecovery from "./components/PasswordRecovery/PasswordRecovery";
 function App() {
   const dispatch = useDispatch();
 
-  let clientToken = sessionStorage.getItem("auth");
-  const config = { headers: { authorization: clientToken } };
-  if (clientToken) {
+  useEffect(() => {
     axios
-      .post("/auth/check", {}, config)
+      .post("/auth/check")
       .then((response) => {
         dispatch(login(response.data.userId));
       })
       .catch((err) => {
         dispatch(logout());
       });
-  }
+  }, []);
 
   const absentIDs = useSelector((state) => state.absentIDs.IDs);
   const user = useSelector((state) => state.auth.user);

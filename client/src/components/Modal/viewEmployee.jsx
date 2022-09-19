@@ -9,7 +9,6 @@ const ViewEmployee = (props) => {
 
   const employee = props.employee;
 
-  const clientToken = sessionStorage.getItem("auth");
 
   const [initialValues, setInitialValues] = useState(employee);
 
@@ -32,14 +31,13 @@ const ViewEmployee = (props) => {
   };
 
   const handleDelete = () => {
-    const config = { headers: { authorization: clientToken } };
     axios
       .post(
         "/employee/deleteEmployee",
         {
           userId: employee._id,
         },
-        config
+        
       )
       .then(() => {
         props.updated();
@@ -67,13 +65,12 @@ const ViewEmployee = (props) => {
     ) {
       alert("Please fill all details");
     } else {
-      const config = { headers: { authorization: clientToken } };
       const postData = {
         employee: initialValues,
       };
       e.preventDefault();
       axios
-        .post("/employee/editEmployee", postData, config)
+        .post("/employee/editEmployee", postData,)
         .then((response) => {
           if (response.status === 200) {
             setAdded(true);

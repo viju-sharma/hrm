@@ -11,18 +11,15 @@ import { openModal } from "../../features/modal-slice";
 const AllEmployee = (props) => {
   const [isUpdated, setUpdated] = useState(false);
 
-  const clientToken = sessionStorage.getItem("auth");
-
   const [employees, setEmployees] = useState([]);
   const dispatch = useDispatch();
 
   const [employeeSelected, setEmployee] = useState();
   useEffect(() => {
-    const config = { headers: { authorization: clientToken } };
-    axios.get("/user/getUser", config).then((result) => {
+    axios.get("/user/getUser").then((result) => {
       setEmployees(result.data);
     });
-  }, [clientToken, isUpdated]);
+  }, [isUpdated]);
 
   // let navigate = useNavigate();
   const handleModalClose = () => {

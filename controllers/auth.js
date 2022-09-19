@@ -6,8 +6,6 @@ const Token = require("../models/token");
 const crypto = require("crypto");
 const sendEmail = require("../utils/mail");
 
-
-
 exports.Signup = (req, res, next) => {
   const saltRounds = 10;
   bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
@@ -81,8 +79,14 @@ exports.Login = async (req, res, next) => {
         .send({ message: "An email is sent to your account please verify" });
     }
     const token = signJWT(user._id);
-    const data = { token: token, userId: user._id };
-    res.send(data);
+    res.cookie(String(user._id), token, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "lax",
+    });
+    return res
+      .status(200)
+      .send({ userId: user._id, message: "Login Successful" });
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });
   }
