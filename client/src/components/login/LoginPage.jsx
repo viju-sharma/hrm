@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../features/auth-slice";
 import classes from "./Loginpage.module.css";
 import ForgotPassword from "./ForgotPassword";
+import Typewriter from "typewriter-effect";
 
 const LoginPage = (props) => {
   const [isErr, setErr] = useState();
@@ -64,6 +65,30 @@ const LoginPage = (props) => {
         className={`ui segment placeholder ${classes.loginForm}`}
         id={classes.loginForm}
       >
+        <div style={{ width: "100vw" }}>
+          <Typewriter
+            // options={{ loop: true }}
+            onInit={(typewriter) => {
+              typewriter
+                .pauseFor(1200)
+                .typeString(
+                  "<p style='width=100%;color:#fff;font-size:3rem;'>Helloo, <span style='font-family: 'Cedarville Cursive', cursive;'>I'm Vijender.</span></p>"
+                )
+                .pauseFor(300)
+                .deleteAll()
+                .typeString(
+                  "<p style='width=100%;color:#fff;font-size:1.5rem;'>Welcome To Human Resource Management System</p>"
+                )
+                .pauseFor(2000)
+                .typeString(
+                  "<p style='width=100%;color:#fff;font-size:1.5rem;'>Please Enter Your Email and Password</p>"
+                )
+                .pauseFor(1000)
+                .start();
+            }}
+          />
+        </div>
+
         <div className={classes.loginBlock}>
           {isErr && (
             <div
