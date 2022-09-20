@@ -4,7 +4,6 @@ import {
   Input,
   Grid,
   Button,
-  Icon,
   Container,
   Message,
 } from "semantic-ui-react";

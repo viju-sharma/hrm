@@ -25,6 +25,7 @@ function App() {
       .catch((err) => {
         dispatch(logout());
       });
+    //eslint-disable-next-line
   }, []);
 
   const absentIDs = useSelector((state) => state.absentIDs.IDs);

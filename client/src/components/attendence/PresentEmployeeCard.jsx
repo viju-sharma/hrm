@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SingleCard from "./SingleCard";
 import { Grid } from "semantic-ui-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { isChanged } from "../../features/attendence-slice";
 
 const PresentEmployeeCard = (props) => {

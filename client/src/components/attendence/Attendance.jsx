@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 import Navigation from "../navigation/Navigation";
 import AbsentEmployeeCard from "./AbsentEmployeeCard";
 import PresentEmployeeCard from "./PresentEmployeeCard";
 
-import { Container, Segment } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 
 const Attendance = (props) => {
   const [searchValue, setSearchValue] = useState("");

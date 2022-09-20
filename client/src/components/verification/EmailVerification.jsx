@@ -32,6 +32,7 @@ const VerifyAccount = () => {
         });
         setLoading(false);
       });
+      //eslint-disable-next-line
   }, []);
 
   return loading ? (

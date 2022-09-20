@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Button, Container } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import Navigation from "../navigation/Navigation";
 import { logout } from "../../features/auth-slice";
 const Home = () => {
