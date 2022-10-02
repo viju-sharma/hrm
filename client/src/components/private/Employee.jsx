@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Divider } from "semantic-ui-react";
 import classes from "./Employee.module.css";
 const Employee = (props) => {
   const employee = props.employee;
@@ -9,9 +10,16 @@ const Employee = (props) => {
     "-" +
     new Date(employee.createdAt).getFullYear();
   return (
-    <div className={classes.mainDiv} onClick={props.onClick}>
+    <div className={classes.card} onClick={props.onClick}>
       <div>
         <img src="/images/matthew.png" alt="profile" />
+      </div>
+      <div className={classes.nameDiv}>
+        <p className={classes.name}>
+          {employee.firstname + " " + employee.lastname}
+        </p>
+        <Divider className={classes.uidivider} fitted />
+        <p className={classes.department}>{employee.department}</p>
       </div>
     </div>
   );
