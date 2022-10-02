@@ -51,9 +51,7 @@ const AllEmployee = (props) => {
             }}
           />
         )}
-        <div id="linkCards" className="ui link cards">
-          {Employees}
-        </div>
+        <div>{Employees}</div>
       </Container>
     </React.Fragment>
   );

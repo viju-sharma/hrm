@@ -124,7 +124,8 @@ const AddEmployee = (props) => {
               <div className="field">
                 <label>Salary</label>
                 <input
-                  type="text"
+                  maxLength={10}
+                  type="number"
                   name="salary"
                   placeholder="Salary"
                   required
@@ -150,8 +151,9 @@ const AddEmployee = (props) => {
               <div className="four wide field">
                 <label>Contact</label>
                 <input
-                  type="text"
                   name="mobile"
+                  type="number"
+                  maxLength={10}
                   placeholder="Contact No."
                   required
                   onChange={handleChange}
@@ -175,7 +177,8 @@ const AddEmployee = (props) => {
               <div className="four wide field">
                 <label>Pincode</label>
                 <input
-                  type="text"
+                  type="number"
+                  maxLength={6}
                   name="pincode"
                   onChange={handleChange}
                   value={initialValue.pincode}

@@ -12,8 +12,6 @@ const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const verificationRoutes = require("./routes/verification");
 
-const { ObjectId } = require("mongodb");
-
 require("dotenv").config();
 const app = express();
 
@@ -47,10 +45,11 @@ if (process.env.NODE_ENV === "production") {
 
 mongoose
   .connect(process.env.MONGODB_CLUSTER)
-  .then((result) => {
+  .then(() => {
     console.log("database connected");
-    app.listen(process.env.PORT || 5000, () => {
-      console.log("server is spinning on port " + process.env.PORT);
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log("server is spinning on port " + PORT);
     });
   })
   .catch((err) => {

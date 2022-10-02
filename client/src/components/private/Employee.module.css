@@ -1,0 +1,10 @@
+.mainDiv{
+    background-color : #fff;
+    margin : 0.3rem;
+    border-radius : 10px;
+}
+
+.mainDiv img {
+    height: 4rem;
+    border-radius: 50%;
+}
