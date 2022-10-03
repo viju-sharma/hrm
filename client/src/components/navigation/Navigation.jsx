@@ -23,7 +23,7 @@ import ListItemText from "@mui/material/ListItemText";
 //
 
 import { useDispatch } from "react-redux";
-// import classes from "./Navigation.module.css";
+import classes from "./Navigation.module.css";
 import { logout } from "../../features/auth-slice";
 
 // mui
@@ -175,6 +175,7 @@ export default function Navigation(props) {
             <MenuIcon />
           </IconButton>
           <SwipeableDrawer
+            className={classes.sidebar}
             anchor={"left"}
             open={state["left"]}
             onClose={toggleDrawer("left", false)}
