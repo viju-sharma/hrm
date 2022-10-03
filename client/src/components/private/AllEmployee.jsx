@@ -41,18 +41,16 @@ const AllEmployee = (props) => {
   return (
     <React.Fragment>
       <Navigation active="employees" />
-      <Container>
-        {employeeSelected && (
-          <ViewEmployee
-            employee={employeeSelected}
-            onClose={handleModalClose}
-            updated={() => {
-              setUpdated(!isUpdated);
-            }}
-          />
-        )}
-        <div>{Employees}</div>
-      </Container>
+      {employeeSelected && (
+        <ViewEmployee
+          employee={employeeSelected}
+          onClose={handleModalClose}
+          updated={() => {
+            setUpdated(!isUpdated);
+          }}
+        />
+      )}
+      <div style={{ textAlign: "center" }}>{Employees}</div>
     </React.Fragment>
   );
 };

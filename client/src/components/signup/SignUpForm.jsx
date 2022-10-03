@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
+import classes from "./SignUpForm.module.css";
 
 const SignUpForm = (props) => {
   const user = props.user;
@@ -34,8 +35,8 @@ const SignUpForm = (props) => {
   const handleSubmit = (e) => {
     setLoading(true);
     axios
-      .post("/auth/signup", initalValue)
-      .then((response) => {
+    .post("/auth/signup", initalValue)
+    .then((response) => {
         setLoading(false);
         setServerRes({
           type: "success",
@@ -60,10 +61,10 @@ const SignUpForm = (props) => {
         });
         setLoading(false);
       });
-  };
-  if (!user) {
-    return (
-      <Container text>
+    };
+    if (!user) {
+      return (
+        <Container className={`centered ${classes.container}`} text>
         {serverRes && (
           <Message
             warning
@@ -71,6 +72,8 @@ const SignUpForm = (props) => {
             content={serverRes.message}
           />
         )}
+        <div>
+
         <Form onSubmit={handleSubmit}>
           <Grid columns={2}>
             <Grid.Row>
@@ -160,6 +163,7 @@ const SignUpForm = (props) => {
             </div>
           </button>
         </Link>
+        </div>
       </Container>
     );
   } else {

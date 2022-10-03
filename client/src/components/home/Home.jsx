@@ -1,25 +1,43 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Container } from "semantic-ui-react";
+import React, { Fragment } from "react";
+import classes from "./Home.module.css";
 import Navigation from "../navigation/Navigation";
-import { logout } from "../../features/auth-slice";
+import { Statistic } from "semantic-ui-react";
 const Home = () => {
-  const dispatch = useDispatch();
   return (
-    <div>
-      <Navigation active={"home"} />
-      <Container>
-        <h1>this is home page we have to protect</h1>
-        <button
-          className="ui button secondary"
-          onClick={() => {
-            dispatch(logout());
-          }}
-        >
-          Logout
-        </button>
-      </Container>
-    </div>
+    <Fragment>
+      <Navigation title="Home" />
+      <div className={classes.container}>
+        <div className={classes.tiles}>
+          <div className={`${classes.tile}`}>
+            <div style={{ width: "100%" }}>
+              <p>Total Employees</p>
+            </div>
+            <Statistic inverted className={classes.statistic}>
+              <Statistic.Value>5,550</Statistic.Value>
+              <Statistic.Label>Employees</Statistic.Label>
+            </Statistic>
+          </div>
+          <div className={`${classes.tile}`}>
+            <div style={{ width: "100%" }}>
+              <p>Total Employees</p>
+            </div>
+            <Statistic inverted className={classes.statistic}>
+              <Statistic.Value>5,550</Statistic.Value>
+              <Statistic.Label>Employees</Statistic.Label>
+            </Statistic>
+          </div>
+          <div className={`${classes.tile}`}>
+            <div style={{ width: "100%" }}>
+              <p>Total Employees</p>
+            </div>
+            <Statistic inverted className={classes.statistic}>
+              <Statistic.Value>5,550</Statistic.Value>
+              <Statistic.Label>Employees</Statistic.Label>
+            </Statistic>
+          </div>
+        </div>
+      </div>
+    </Fragment>
   );
 };
 export default Home;

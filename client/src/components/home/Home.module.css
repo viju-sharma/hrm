@@ -1,0 +1,38 @@
+.container{
+    text-align: center;
+}
+.tiles{
+
+}
+
+.tile{
+    margin : 0.5rem;
+    min-width : 200px;
+    width : 30%;
+    background-color : #937DC2;
+    display : inline-block;
+    padding : 1rem;
+    border-radius : 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.tile:hover{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+.tile p {
+    text-align : left;
+    color : #fff;
+    font-weight : 550;
+    margin-inline: 0.5rem;
+}
+
+
+.statistic{
+    width : 100%;
+}
+.statistic div{
+    margin : auto;
+}
+
+@media only screen and (max-width: 426px) {
+ 
+}

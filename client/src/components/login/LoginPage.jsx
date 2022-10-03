@@ -62,7 +62,7 @@ const LoginPage = (props) => {
   if (!user) {
     return (
       <div
-        className={`ui segment placeholder ${classes.loginForm}`}
+        className={`ui segment placeholder centered ${classes.loginForm}`}
         id={classes.loginForm}
       >
         <div style={{ width: "100vw" }}>
