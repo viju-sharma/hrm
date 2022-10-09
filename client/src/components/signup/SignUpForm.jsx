@@ -7,9 +7,9 @@ import {
   Container,
   Message,
 } from "semantic-ui-react";
-import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
 import classes from "./SignUpForm.module.css";
+import { publicRequest } from "../../utils/requestMethod";
 
 const SignUpForm = (props) => {
   const user = props.user;
@@ -34,7 +34,7 @@ const SignUpForm = (props) => {
 
   const handleSubmit = (e) => {
     setLoading(true);
-    axios
+    publicRequest
     .post("/auth/signup", initalValue)
     .then((response) => {
         setLoading(false);

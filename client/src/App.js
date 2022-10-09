@@ -5,7 +5,6 @@ import "./App.css";
 import Home from "./components/home/Home";
 import LoginPage from "./components/login/LoginPage";
 import SignUpForm from "./components/signup/SignUpForm";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "./features/auth-slice";
 import AddEmployee from "./components/private/AddEmployee";
@@ -13,11 +12,13 @@ import AllEmployee from "./components/private/AllEmployee";
 import Attendance from "./components/attendence/Attendance";
 import VerifyAccount from "./components/verification/EmailVerification";
 import PasswordRecovery from "./components/PasswordRecovery/PasswordRecovery";
+import { privateRequest } from "./utils/requestMethod";
+import Profile from "./components/profile/Profile";
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
+    privateRequest
       .post("/auth/check")
       .then((response) => {
         dispatch(login(response.data.userId));
@@ -29,38 +30,44 @@ function App() {
   }, []);
 
   const absentIDs = useSelector((state) => state.absentIDs.IDs);
-  const user = useSelector((state) => state.auth.user);
+  const userId = useSelector((state) => state.auth.user);
   return (
     <div className="App">
       <Routes>
         <Route
           path="/addEmployee"
           element={
-            user ? <AddEmployee user={user} /> : <Navigate to="/login" />
+            userId ? <AddEmployee user={userId} /> : <Navigate to="/login" />
           }
         />
         <Route
           path="/employees"
           element={
-            user ? <AllEmployee user={user} /> : <Navigate to="/login" />
+            userId ? <AllEmployee user={userId} /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            userId ? <Profile user={userId} /> : <Navigate to="/login" />
           }
         />
         <Route
           path="/"
-          element={user ? <Home user={user} /> : <Navigate to="/login" />}
+          element={userId ? <Home user={userId} /> : <Navigate to="/login" />}
         />
         <Route
           path="/attendance"
           element={
-            user ? (
-              <Attendance absentIDs={absentIDs} user={user} />
+            userId ? (
+              <Attendance absentIDs={absentIDs} user={userId} />
             ) : (
               <Navigate to="/login" />
             )
           }
         />
-        <Route path="/login" element={<LoginPage user={user} />} />
-        <Route path="/signup" element={<SignUpForm user={user} />} />
+        <Route path="/login" element={<LoginPage user={userId} />} />
+        <Route path="/signup" element={<SignUpForm user={userId} />} />
         <Route path="/users/:id/verify/:token" element={<VerifyAccount />} />
         <Route
           path="/forgotPassword/:id/verify/:token/user/:email"

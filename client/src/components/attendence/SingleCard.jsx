@@ -1,14 +1,14 @@
-import axios from "axios";
 import { Grid, Segment, Button, Image, Header } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { isChanged } from "../../features/attendence-slice";
+import { privateRequest } from "../../utils/requestMethod";
 
 const SingleCard = (props) => {
   const dispatch = useDispatch();
 
 
   const removeLeave = () => {
-    axios
+    privateRequest
       .post(
         "/employee/removeLeave",
         {

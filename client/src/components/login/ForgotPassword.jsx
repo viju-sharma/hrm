@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Button, Header, Icon, Input, Modal, Message } from "semantic-ui-react";
 import classes from "./ForgotPassword.module.css";
+import { publicRequest } from "../../utils/requestMethod";
 
 const ResponseMessage = (props) => {
   const message = props.message;
@@ -43,7 +43,7 @@ function ForgotPassword() {
     }
     try {
       setLoading(true);
-      const response = await axios.post("/verify/forgetPassword", {
+      const response = await publicRequest.post("/verify/forgetPassword", {
         email: recoveryEmail,
       });
       setMessage({

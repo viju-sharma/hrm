@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Input } from "semantic-ui-react";
 import classes from "./PasswordRecovery.module.css";
 import MessageResponse from "../../utils/Message";
+import { publicRequest } from "../../utils/requestMethod";
 
 const PasswordRecovery = () => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const PasswordRecovery = () => {
       return setIsError(true);
     }
     try {
-      const response = await axios.post("/verify/changePassword", {
+      const response = await publicRequest.post("/verify/changePassword", {
         id,
         clientToken: token,
         password: inputValue.input1,

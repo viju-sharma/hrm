@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Container, Dropdown } from "semantic-ui-react";
 import { countryOptions, stateOptions } from "../../utils/util";
-import axios from "axios";
 import Navigation from "../navigation/Navigation";
+import { privateRequest } from "../../utils/requestMethod";
 const AddEmployee = (props) => {
   // check show success after user added
   const [isAdded, setAdded] = useState(false);
@@ -53,7 +53,7 @@ const AddEmployee = (props) => {
       alert("Please fill all details");
     } else {
       e.preventDefault();
-      axios.post("/employee/addEmployee", postData).then((response) => {
+      privateRequest.post("/employee/addEmployee", postData).then((response) => {
         if (response.status === 200) {
           setAdded(true);
           setValues(emptyField);

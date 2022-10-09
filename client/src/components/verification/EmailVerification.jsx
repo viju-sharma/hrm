@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import { publicRequest } from "../../utils/requestMethod";
 const VerifyAccount = () => {
   const [loading, setLoading] = useState(false);
 
@@ -11,7 +11,7 @@ const VerifyAccount = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
+    publicRequest
       .get(`/verify/${id}/verify/${token}`)
       .then((response) => {
         console.log(response);
@@ -32,7 +32,7 @@ const VerifyAccount = () => {
         });
         setLoading(false);
       });
-      //eslint-disable-next-line
+    //eslint-disable-next-line
   }, []);
 
   return loading ? (

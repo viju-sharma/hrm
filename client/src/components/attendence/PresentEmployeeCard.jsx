@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import SingleCard from "./SingleCard";
 import { Grid } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { isChanged } from "../../features/attendence-slice";
+import { privateRequest } from "../../utils/requestMethod";
 
 const PresentEmployeeCard = (props) => {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ const PresentEmployeeCard = (props) => {
 
   useEffect(() => {
     // getAllEmployees
-    axios
-      .get("/user/getUser")
+    privateRequest
+      .get("/employee/getEmployees")
       .then((result) => {
         setEmployees(result.data);
       })
@@ -50,7 +50,7 @@ const PresentEmployeeCard = (props) => {
     };
 
     const addLeave = () => {
-      axios
+      privateRequest
         .post("/employee/addLeave", postData)
         .then((result) => {
           dispatch(isChanged());

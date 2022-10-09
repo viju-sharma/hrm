@@ -1,12 +1,11 @@
 import React from "react";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Container } from "semantic-ui-react";
 import Navigation from "../navigation/Navigation";
 import Employee from "./Employee";
 import ViewEmployee from "../Modal/viewEmployee";
 import { openModal } from "../../features/modal-slice";
+import { privateRequest } from "../../utils/requestMethod";
 
 const AllEmployee = (props) => {
   const [isUpdated, setUpdated] = useState(false);
@@ -16,7 +15,7 @@ const AllEmployee = (props) => {
 
   const [employeeSelected, setEmployee] = useState();
   useEffect(() => {
-    axios.get("/user/getUser").then((result) => {
+    privateRequest.get("/employee/getEmployees").then((result) => {
       setEmployees(result.data);
     });
   }, [isUpdated]);

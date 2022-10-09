@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import SingleCard from "./SingleCard";
 import { Grid } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { addAbsentIDs } from "../../features/absent-slice";
+import { privateRequest } from "../../utils/requestMethod";
 
 const AbsentEmployeeCard = (props) => {
   const changeStatus = useSelector((state) => {
@@ -13,15 +13,14 @@ const AbsentEmployeeCard = (props) => {
   const dispatch = useDispatch();
   const [absentEmployees, setAbsentEmployees] = useState([]);
 
-
   const searchValue = props.searchValue;
 
   // const [absentID, setAbsentID] = useState([]);
 
   useEffect(() => {
     // get absentEmployees
-    axios
-      .get("/user/getAbsentToday")
+    privateRequest
+      .get("/employee/getAbsentToday")
       .then((result) => {
         setAbsentEmployees(result.data);
       })

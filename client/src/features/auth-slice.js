@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { privateRequest } from "../utils/requestMethod";
 const initialState = { user: "" };
 
 export const authSlice = createSlice({
@@ -11,7 +11,7 @@ export const authSlice = createSlice({
     },
     logout: (state) => {
       state.user = "";
-      axios.post("auth/logout");
+      privateRequest.post("auth/logout");
     },
   },
 });

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -6,6 +5,7 @@ import { login } from "../../features/auth-slice";
 import classes from "./Loginpage.module.css";
 import ForgotPassword from "./ForgotPassword";
 import Typewriter from "typewriter-effect";
+import { publicRequest } from "../../utils/requestMethod";
 
 const LoginPage = (props) => {
   const [isErr, setErr] = useState();
@@ -26,7 +26,7 @@ const LoginPage = (props) => {
   let { email, password } = initialValue;
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
+    publicRequest
       .post("/auth/login", initialValue)
       .then((response) => {
         response.status === 200 && dispatch(login(response.data.userId));

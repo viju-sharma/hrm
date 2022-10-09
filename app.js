@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const verificationRoutes = require("./routes/verification");
-
+const employeeRoutes = require("./routes/employeeRoutes");
 require("dotenv").config();
 const app = express();
 
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/verify", verificationRoutes);
 app.use("/auth", authRoutes);
-app.use("/employee", adminRoutes);
+app.use("/employee", employeeRoutes);
 app.use("/user", adminRoutes);
 
 // Serve Static assets if in production

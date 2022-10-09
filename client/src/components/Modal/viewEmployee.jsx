@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Modal, Image, Grid, Icon, Header } from "semantic-ui-react";
 import { closeModal } from "../../features/modal-slice";
-import axios from "axios";
+import { privateRequest } from "../../utils/requestMethod";
 
 const ViewEmployee = (props) => {
   const [secondOpen, setSecondOpen] = useState(false);
 
   const employee = props.employee;
-
 
   const [initialValues, setInitialValues] = useState(employee);
 
@@ -31,14 +30,10 @@ const ViewEmployee = (props) => {
   };
 
   const handleDelete = () => {
-    axios
-      .post(
-        "/employee/deleteEmployee",
-        {
-          userId: employee._id,
-        },
-        
-      )
+    privateRequest
+      .post("/employee/deleteEmployee", {
+        userId: employee._id,
+      })
       .then(() => {
         props.updated();
         setSecondOpen(false);
@@ -69,8 +64,8 @@ const ViewEmployee = (props) => {
         employee: initialValues,
       };
       e.preventDefault();
-      axios
-        .post("/employee/editEmployee", postData,)
+      privateRequest
+        .post("/employee/editEmployee", postData)
         .then((response) => {
           if (response.status === 200) {
             setAdded(true);
