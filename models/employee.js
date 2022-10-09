@@ -3,18 +3,17 @@ const Schema = mongoose.Schema;
 
 const employeeSchema = new Schema(
   {
-    firstname: {
+    fullName: {
       type: String,
       required: true,
     },
-    lastname: {
+    profileImg: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     mobile: {
       type: Number,
@@ -22,11 +21,9 @@ const employeeSchema = new Schema(
     },
     salary: {
       type: Number,
-      required: true,
     },
     department: {
       type: String,
-      required: true,
     },
     streetAdd: {
       type: String,

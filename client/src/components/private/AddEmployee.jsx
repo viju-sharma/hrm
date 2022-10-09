@@ -1,9 +1,20 @@
-import React, { useState } from "react";
-import { Container, Dropdown } from "semantic-ui-react";
+import React, { useRef, useState, useEffect } from "react";
+import { Button, Container, Dropdown } from "semantic-ui-react";
 import { countryOptions, stateOptions } from "../../utils/util";
 import Navigation from "../navigation/Navigation";
 import { privateRequest } from "../../utils/requestMethod";
+
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../utils/firebase";
+import { v4 as uuidv4 } from "uuid";
+
 const AddEmployee = (props) => {
+  const profileImageRef = useRef();
+  const [imageFile, setImageFile] = useState(null);
+
+  const [imageuploadLoading, setImageUploadLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   // check show success after user added
   const [isAdded, setAdded] = useState(false);
 
@@ -11,8 +22,8 @@ const AddEmployee = (props) => {
   const [isFailed, setFailed] = useState(false);
 
   const emptyField = {
-    firstname: "",
-    lastname: "",
+    fullName: "",
+    profileImg: "",
     email: "",
     mobile: "",
     streetAdd: "",
@@ -36,31 +47,55 @@ const AddEmployee = (props) => {
     userId: user,
   };
 
-  const handleSubmit = (e) => {
-    if (
-      initialValue.firstname === "" ||
-      initialValue.lastname === "" ||
-      initialValue.email === "" ||
-      initialValue.mobile === "" ||
-      initialValue.streetAdd === "" ||
-      initialValue.pincode === "" ||
-      initialValue.state === "" ||
-      initialValue.country === "" ||
-      initialValue.department === "" ||
-      initialValue.salary === ""
-    ) {
+  const handleSubmit = async (e) => {
+    setLoading(true);
+
+    try {
+      if (
+        initialValue.fullName === "" ||
+        initialValue.profileImg === "" ||
+        initialValue.email === "" ||
+        initialValue.mobile === "" ||
+        initialValue.streetAdd === "" ||
+        initialValue.pincode === "" ||
+        initialValue.state === "" ||
+        initialValue.country === "" ||
+        initialValue.department === "" ||
+        initialValue.salary === ""
+      ) {
+        e.preventDefault();
+        setLoading(false);
+        return alert("Please fill all details");
+      }
       e.preventDefault();
-      alert("Please fill all details");
-    } else {
-      e.preventDefault();
-      privateRequest.post("/employee/addEmployee", postData).then((response) => {
-        if (response.status === 200) {
-          setAdded(true);
-          setValues(emptyField);
-        } else {
-          setFailed(true);
-        }
+      await privateRequest.post("/employee/addEmployee", postData).then(() => {
+        setAdded(true);
+        setValues(emptyField);
+        setImageFile(null);
+        return setLoading(false);
       });
+    } catch (error) {
+      alert(error.message);
+      setFailed(true);
+      return setLoading(false);
+    }
+  };
+
+  // upload Image to Firebase
+  const uploadImageToFirebase = async () => {
+    setImageUploadLoading(true);
+    try {
+      if (imageFile) {
+        const imageRef = ref(storage, `images/${imageFile.name + uuidv4()}`);
+        const snapshot = await uploadBytes(imageRef, imageFile);
+        const url = await getDownloadURL(snapshot.ref);
+        setValues((values) => ({ ...values, profileImg: url }));
+        return setImageUploadLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+      return setImageUploadLoading(false);
     }
   };
 
@@ -82,30 +117,64 @@ const AddEmployee = (props) => {
         )}
         <form className="ui form " onSubmit={handleSubmit}>
           <h4 className="ui dividing header">Employee Information</h4>
-          <div className="field">
-            <label>Name</label>
-            <div className="two fields">
-              <div className="field">
+          <div className="two fields">
+            <div className="field">
+              <label>Full Name</label>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Full Name"
+                required
+                onChange={handleChange}
+                value={initialValue.fullName}
+              />
+            </div>
+            <div className="field">
+              <label>Profile Image</label>
+              <div className="ui action input">
                 <input
-                  autoFocus
-                  type="text"
-                  name="firstname"
-                  placeholder="First Name"
                   required
-                  onChange={handleChange}
-                  value={initialValue.firstname}
-                />
-              </div>
-              <div className="field">
-                <input
                   type="text"
-                  name="lastname"
-                  placeholder="Last Name"
-                  required
-                  onChange={handleChange}
-                  value={initialValue.lastname}
+                  readOnly
+                  value={imageFile ? imageFile.name : ""}
+                  placeholder="None"
                 />
+                {imageFile ? (
+                  <Button
+                    disabled={
+                      initialValue.profileImg !== "" || imageuploadLoading
+                    }
+                    loading={imageuploadLoading}
+                    icon={initialValue.profileImg === "" ? "upload" : "check"}
+                    className="ui button"
+                    color={initialValue.profileImg === "" ? "blue" : "green"}
+                    onClick={uploadImageToFirebase}
+                    content={
+                      initialValue.profileImg === ""
+                        ? "Upload Image"
+                        : "Uploaded"
+                    }
+                  ></Button>
+                ) : (
+                  <button
+                    className="ui button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      profileImageRef.current.click();
+                    }}
+                  >
+                    Browse Image
+                  </button>
+                )}
               </div>
+              <input
+                ref={profileImageRef}
+                name="profileImage"
+                hidden
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImageFile(e.target.files[0])}
+              />
             </div>
           </div>
           <div className="field">
@@ -215,10 +284,16 @@ const AddEmployee = (props) => {
               />
             </div>
           </div>
-
-          <button className="ui button secondary" tabIndex="0" type="submit">
-            Add Employee
-          </button>
+          <div>
+            <Button
+              disabled={loading}
+              loading={loading}
+              icon="plus"
+              content=" Add Employee"
+              className="ui button secondary"
+              type="submit"
+            ></Button>
+          </div>
         </form>
       </Container>
     </React.Fragment>

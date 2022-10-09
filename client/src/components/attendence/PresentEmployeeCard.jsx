@@ -33,8 +33,7 @@ const PresentEmployeeCard = (props) => {
 
   const EmployeesItems = Employees.filter(
     (employee) =>
-      employee.firstname.includes(searchValue) ||
-      employee.lastname.includes(searchValue) ||
+      employee.fullName.includes(searchValue) ||
       employee.department.includes(searchValue)
   ).map((employee) => {
     const slicedDate = new Date().toJSON().slice(0, 10).toString();

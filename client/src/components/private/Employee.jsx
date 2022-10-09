@@ -8,9 +8,7 @@ const Employee = (props) => {
         <img src="/images/matthew.png" alt="profile" />
       </div>
       <div className={classes.nameDiv}>
-        <p className={classes.name}>
-          {employee.firstname + " " + employee.lastname}
-        </p>
+        <p className={classes.name}>{employee.fullName}</p>
         <Divider className={classes.uidivider} fitted />
         <p className={classes.department}>{employee.department}</p>
       </div>

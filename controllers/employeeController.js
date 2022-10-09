@@ -20,12 +20,11 @@ exports.totalEmployees = (req, res, next) => {
 
 // To add new employees
 exports.AddEmployee = (req, res) => {
-  console.log();
   const empDetails = req.body.employee;
   const hrId = req.body.userId;
   const data = {
-    firstname: empDetails.firstname,
-    lastname: empDetails.lastname,
+    fullName: empDetails.fullName,
+    profileImg: empDetails.profileImg,
     email: empDetails.email,
     mobile: empDetails.mobile,
     streetAdd: empDetails.streetAdd,
@@ -42,7 +41,6 @@ exports.AddEmployee = (req, res) => {
       employee
         .save()
         .then((result) => {
-          console.log(result);
           User.findByIdAndUpdate(
             { _id: hrId },
             { $push: { employees: result._id } }

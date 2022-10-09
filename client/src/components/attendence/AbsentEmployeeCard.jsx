@@ -42,8 +42,7 @@ const AbsentEmployeeCard = (props) => {
   const absentEmployeesItems = absentEmployees
     .filter(
       (absent) =>
-        absent.firstname.includes(searchValue) ||
-        absent.lastname.includes(searchValue) ||
+        absent.fullName.includes(searchValue) ||
         absent.department.includes(searchValue)
     )
     .map((employee, index) => {
@@ -53,7 +52,7 @@ const AbsentEmployeeCard = (props) => {
           emp_Id={employee._id}
           absent
           key={index}
-          firstName={employee.firstname}
+          firstName={employee.fullName}
         />
       );
     });

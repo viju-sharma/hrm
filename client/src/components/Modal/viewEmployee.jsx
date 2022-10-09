@@ -47,8 +47,8 @@ const ViewEmployee = (props) => {
 
   const handleSubmit = (e) => {
     if (
-      initialValues.firstname === "" ||
-      initialValues.lastname === "" ||
+      initialValues.fullName === "" ||
+      initialValues.profileImg === "" ||
       initialValues.email === "" ||
       initialValues.mobile === "" ||
       initialValues.streetAdd === "" ||
@@ -90,11 +90,7 @@ const ViewEmployee = (props) => {
         <Modal.Header>
           <Grid>
             <Grid.Column floated="left" width={5}>
-              <div>
-                {employee.firstname.toUpperCase() +
-                  " " +
-                  employee.lastname.toUpperCase()}
-              </div>
+              <div>{employee.fullName.toUpperCase()}</div>
             </Grid.Column>
             {isAdded && (
               <Grid.Column floated="right" width={9}>
@@ -114,31 +110,21 @@ const ViewEmployee = (props) => {
           </Grid>
         </Modal.Header>
         <Modal.Content image>
-          <Image size="medium" src="/images/rachel.png" wrapped />
+          <Image size="medium" src={initialValues.profileImg} wrapped />
           <Modal.Description>
             <form className="ui form " onSubmit={handleSubmit}>
               <h4 className="ui dividing header">Employee Information</h4>
               <div className="field">
                 <label>Name</label>
-                <div className="two fields">
-                  <div className="field">
+                <div className="field">
+                  <div className="two fields">
                     <input
                       type="text"
-                      name="firstname"
-                      placeholder="First Name"
+                      name="fullName"
+                      placeholder="Full Name"
                       required
                       onChange={handleChange}
-                      value={initialValues.firstname}
-                    />
-                  </div>
-                  <div className="field">
-                    <input
-                      type="text"
-                      name="lastname"
-                      placeholder="Last Name"
-                      required
-                      onChange={handleChange}
-                      value={initialValues.lastname}
+                      value={initialValues.fullName}
                     />
                   </div>
                 </div>
