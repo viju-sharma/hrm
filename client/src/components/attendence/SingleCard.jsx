@@ -6,16 +6,11 @@ import { privateRequest } from "../../utils/requestMethod";
 const SingleCard = (props) => {
   const dispatch = useDispatch();
 
-
   const removeLeave = () => {
     privateRequest
-      .post(
-        "/employee/removeLeave",
-        {
-          emp_Id: props.emp_Id,
-        },
-        
-      )
+      .post("/employee/removeLeave", {
+        emp_Id: props.emp_Id,
+      })
       .then((result) => {
         dispatch(isChanged());
       })
@@ -30,12 +25,7 @@ const SingleCard = (props) => {
       <Segment color={props.absent ? "red" : "green"} raised>
         <Grid verticalAlign="middle" columns={3} stackable>
           <Grid.Column>
-            <Image
-              centered
-              circular
-              size="tiny"
-              src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-            />
+            <Image centered circular size="tiny" src="/images/rachel.png" />
           </Grid.Column>
           <Grid.Column>
             <Header content={firstName} subheader="2134434" />

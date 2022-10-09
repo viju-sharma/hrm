@@ -114,11 +114,7 @@ const ViewEmployee = (props) => {
           </Grid>
         </Modal.Header>
         <Modal.Content image>
-          <Image
-            size="medium"
-            src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-            wrapped
-          />
+          <Image size="medium" src="/images/rachel.png" wrapped />
           <Modal.Description>
             <form className="ui form " onSubmit={handleSubmit}>
               <h4 className="ui dividing header">Employee Information</h4>
