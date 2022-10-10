@@ -101,7 +101,7 @@ const AddEmployee = (props) => {
 
   return (
     <React.Fragment>
-      <Navigation active="addemployee" />
+      <Navigation icon="add user" title="Add Employee" active="addemployee" />
       <Container>
         {isAdded && (
           <div className="ui success message">

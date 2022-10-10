@@ -33,8 +33,8 @@ const PresentEmployeeCard = (props) => {
 
   const EmployeesItems = Employees.filter(
     (employee) =>
-      employee.fullName.includes(searchValue) ||
-      employee.department.includes(searchValue)
+      employee.fullName.toLowerCase().includes(searchValue.toLowerCase()) ||
+      employee.department.toLowerCase().includes(searchValue.toLowerCase())
   ).map((employee) => {
     const slicedDate = new Date().toJSON().slice(0, 10).toString();
     const postData = {
@@ -63,9 +63,10 @@ const PresentEmployeeCard = (props) => {
       <SingleCard
         absent={absentIDs.includes(employee._id)}
         key={employee._id}
-        firstName={employee.firstname}
+        fullName={employee.fullName}
         addLeave={addLeave}
         emp_Id={employee._id}
+        profileImg={employee.profileImg}
       />
     );
   });

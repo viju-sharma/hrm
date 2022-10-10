@@ -68,3 +68,10 @@ input[type=number] {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.coverImg{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  margin : auto;
+}

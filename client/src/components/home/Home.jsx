@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <Fragment>
-      <Navigation title="Home" />
+      <Navigation icon="home" active="dashboard" title="Home" />
       <div className={classes.container}>
         <div className={classes.tiles}>
           <div className={`${classes.tile}`}>

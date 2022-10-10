@@ -42,8 +42,8 @@ const AbsentEmployeeCard = (props) => {
   const absentEmployeesItems = absentEmployees
     .filter(
       (absent) =>
-        absent.fullName.includes(searchValue) ||
-        absent.department.includes(searchValue)
+        absent.fullName.toLowerCase().includes(searchValue.toLowerCase()) ||
+        absent.department.toLowerCase().includes(searchValue.toLowerCase())
     )
     .map((employee, index) => {
       //   setAbsentID((absentID) => [...absentID, employee._id]);
@@ -52,7 +52,8 @@ const AbsentEmployeeCard = (props) => {
           emp_Id={employee._id}
           absent
           key={index}
-          firstName={employee.fullName}
+          fullName={employee.fullName}
+          profileImg={employee.profileImg}
         />
       );
     });

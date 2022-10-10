@@ -39,7 +39,12 @@ const AllEmployee = (props) => {
 
   return (
     <React.Fragment>
-      <Navigation active="employees" />
+      <Navigation
+        icon="id card"
+        active="employees"
+        title="All Employees"
+        search
+      />
       {employeeSelected && (
         <ViewEmployee
           employee={employeeSelected}

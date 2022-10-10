@@ -22,7 +22,7 @@ import ListItemText from "@mui/material/ListItemText";
 
 //
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./Navigation.module.css";
 import { logout } from "../../features/auth-slice";
 
@@ -35,6 +35,8 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import BadgeIcon from "@mui/icons-material/Badge";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
+import { changeSearchValue } from "../../features/search-slice";
+import { Icon } from "semantic-ui-react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -77,6 +79,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navigation(props) {
+  const dispatch = useDispatch();
+  const searchValue = useSelector((state) => state.searchValue.search);
+
   //   sidebar
   const [state, setState] = React.useState({
     top: false,
@@ -189,18 +194,25 @@ export default function Navigation(props) {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
+            <Icon name={props.icon} style={{ marginInline: "1rem" }} />
             {props.title}
           </Typography>
 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          {props.search && (
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                value={searchValue}
+                onChange={(e) => {
+                  dispatch(changeSearchValue(e.target.value));
+                }}
+              />
+            </Search>
+          )}
 
           <Box sx={{ flexGrow: 1 }} />
           <AccountMenu />

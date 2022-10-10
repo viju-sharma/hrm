@@ -19,18 +19,25 @@ const SingleCard = (props) => {
       });
   };
 
-  const firstName = props.firstName;
+  const fullName = props.fullName;
   return (
     <Grid.Column>
       <Segment color={props.absent ? "red" : "green"} raised>
-        <Grid verticalAlign="middle" columns={3} stackable>
-          <Grid.Column>
-            <Image centered circular size="tiny" src="/images/rachel.png" />
+        <Grid textAlign="center" verticalAlign="middle" columns={3}>
+          <Grid.Column width={4}>
+            <div style={{ width: "4rem", height: "4rem", margin: "auto" }}>
+              <Image
+                centered
+                circular
+                className="coverImg"
+                src={props.profileImg}
+              />
+            </div>
           </Grid.Column>
-          <Grid.Column>
-            <Header content={firstName} subheader="2134434" />
+          <Grid.Column width={8}>
+            <Header content={fullName} subheader="2134434" />
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column width={3}>
             {props.absent && (
               <Button
                 compact

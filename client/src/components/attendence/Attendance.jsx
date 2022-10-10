@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Navigation from "../navigation/Navigation";
 import AbsentEmployeeCard from "./AbsentEmployeeCard";
 import PresentEmployeeCard from "./PresentEmployeeCard";
 
 import { Container } from "semantic-ui-react";
+import { useSelector } from "react-redux";
 
 const Attendance = (props) => {
-  const [searchValue, setSearchValue] = useState("");
-
-  const pull_search_val = (data) => {
-    setSearchValue(data);
-  };
+  const searchValue = useSelector((state) => state.searchValue.search);
 
   const absentIDs = props.absentIDs;
-  // trigger when anything get changed in presentEmployee section
-
   return (
     <React.Fragment>
       <Navigation
+        icon="users"
+        title="Attendance"
         active={"attendance"}
-        searchValue={searchValue}
-        changedValue={pull_search_val}
+        search
       />
       <Container>
         <div className="ui horizontal divider">Absent Employees Employees</div>

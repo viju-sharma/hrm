@@ -4,8 +4,8 @@ const Employee = (props) => {
   const employee = props.employee;
   return (
     <div className={classes.card} onClick={props.onClick}>
-      <div>
-        <img src="/images/matthew.png" alt="profile" />
+      <div className={classes.imageDiv}>
+        <img className="coverImg" src={employee.profileImg} alt="profile" />
       </div>
       <div className={classes.nameDiv}>
         <p className={classes.name}>{employee.fullName}</p>
