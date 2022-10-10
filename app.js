@@ -16,9 +16,16 @@ require("dotenv").config();
 const app = express();
 
 // Helmet
-// const helmet = require("helmet");
-// app.use(helmet());
-
+const helmet = require("helmet");
+app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "img-src": ["'self'", "https: data:"],
+    },
+  })
+);
 // Cookie-parser
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
