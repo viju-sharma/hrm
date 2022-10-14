@@ -6,7 +6,8 @@ import classes from "./Loginpage.module.css";
 import ForgotPassword from "./ForgotPassword";
 import Typewriter from "typewriter-effect";
 import { publicRequest } from "../../utils/requestMethod";
-
+import backgroundImg from "../../Images/triangles-1430105.svg";
+import { Footer } from "../footer/Footer";
 const LoginPage = (props) => {
   const [isErr, setErr] = useState();
   const dispatch = useDispatch();
@@ -62,33 +63,9 @@ const LoginPage = (props) => {
   if (!user) {
     return (
       <div
-        className={`ui segment placeholder centered ${classes.loginForm}`}
-        id={classes.loginForm}
+        className={classes.mainContainer}
+        style={{ backgroundImage: `url(${backgroundImg})` }}
       >
-        <div style={{ width: "100vw" }}>
-          <Typewriter
-            // options={{ loop: true }}
-            onInit={(typewriter) => {
-              typewriter
-                .pauseFor(1200)
-                .typeString(
-                  "<p style='width=100%;color:#fff;font-size:3rem;'>Helloo, <span style='font-family: 'Cedarville Cursive', cursive;'>I'm Vijender.</span></p>"
-                )
-                .pauseFor(300)
-                .deleteAll()
-                .typeString(
-                  "<p style='width=100%;color:#fff;font-size:1.5rem;'>Welcome To Human Resource Management System</p>"
-                )
-                .pauseFor(2000)
-                .typeString(
-                  "<p style='width=100%;color:#fff;font-size:1.5rem;'>Please Enter Your Email and Password</p>"
-                )
-                .pauseFor(1000)
-                .start();
-            }}
-          />
-        </div>
-
         <div className={classes.loginBlock}>
           {isErr && (
             <div
@@ -142,13 +119,16 @@ const LoginPage = (props) => {
             </div>
           </div>
           <div className={`ui horizontal divider ${classes.divider}`}>Or</div>
-          <Link to="/signup">
-            <div className="ui animated fade button" tabIndex="0">
-              <div className="visible content">Don't have account ?</div>
-              <div className="hidden content">Sign Up</div>
-            </div>
-          </Link>
+          <div className={classes.signUpBtn}>
+            <Link to="/signup">
+              <div className="ui animated fade button" tabIndex="1">
+                <div className="visible content">Don't have account ?</div>
+                <div className="hidden content">Sign Up</div>
+              </div>
+            </Link>
+          </div>
         </div>
+        <Footer />
       </div>
     );
   } else {

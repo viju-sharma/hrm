@@ -13,7 +13,7 @@
 }
 
 .mainDiv {
-    width: min(90vw, 95vw);
+    width: fit-content;
     margin : auto;
     padding : 1rem;
     background: rgba(255, 255, 255, 0.36);
