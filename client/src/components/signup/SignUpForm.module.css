@@ -18,7 +18,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+}
+.header {
+    text-align : center;
 }
 .formDiv{
     max-width : 90%;

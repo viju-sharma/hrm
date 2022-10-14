@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Form, Input, Grid, Button, Message } from "semantic-ui-react";
+import { Form, Input, Grid, Button, Message, Divider } from "semantic-ui-react";
 import { Link, Navigate } from "react-router-dom";
 import classes from "./SignUpForm.module.css";
 import { publicRequest } from "../../utils/requestMethod";
@@ -72,7 +72,10 @@ const SignUpForm = (props) => {
           )}
           <div className={classes.mainDiv}>
             <div className={classes.formDiv}>
-              <p>Welcome To The Human Resource Management</p>
+              <div className={classes.header}>
+                <p>Welcome To The Human Resource Management</p>
+                <Divider />
+              </div>
               <Form onSubmit={handleSubmit}>
                 <Grid stackable columns={2}>
                   <Grid.Row>
