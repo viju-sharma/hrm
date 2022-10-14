@@ -25,6 +25,11 @@
 
 }
 
+.mainDiv p{
+  font-family: 'Dancing Script', cursive;
+  color : rgb(255, 255, 255)
+}
+
 @media only screen and (max-width: 435px) {
   .mainDiv {
     padding : 5px;

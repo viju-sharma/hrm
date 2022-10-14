@@ -8,6 +8,7 @@ import Typewriter from "typewriter-effect";
 import { publicRequest } from "../../utils/requestMethod";
 import backgroundImg from "../../Images/triangles-1430105.svg";
 import { Footer } from "../footer/Footer";
+import { Divider } from "semantic-ui-react";
 const LoginPage = (props) => {
   const [isErr, setErr] = useState();
   const dispatch = useDispatch();
@@ -77,6 +78,10 @@ const LoginPage = (props) => {
               <p>{isErr.message}</p>
             </div>
           )}
+          <div className={classes.header}>
+            <p>Welcome Back To Human Resource Management</p>
+            <Divider />
+          </div>
           <div className="ui form">
             <form onSubmit={handleSubmit}>
               <div className="field">

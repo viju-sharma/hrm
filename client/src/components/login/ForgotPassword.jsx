@@ -84,7 +84,7 @@ function ForgotPassword() {
       onOpen={() => setOpen(true)}
       open={open}
       size="tiny"
-      trigger={<div className="cursorPointer">forgot password?</div>}
+      trigger={<div className={`cursorPointer ${classes.fogotPass}`}>forgot password?</div>}
     >
       <Header icon>
         <Icon

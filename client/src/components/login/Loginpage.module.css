@@ -7,6 +7,10 @@
     justify-content: center;
 }
 
+.header{
+    font-size : 1.5rem;
+    text-align: center;
+}
 .label{
     color : rgb(255, 255, 255) !important;
     float : left
@@ -14,7 +18,10 @@
 
 .forgotPassword{
     margin :2rem auto 0;
-    text-align : right;
+    display: flex;
+    justify-content: right;
+    color :rgb(71, 64, 64);
+    font-weight : bold;
 }
 
 .loginBlock{
