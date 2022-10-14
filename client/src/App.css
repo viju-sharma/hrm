@@ -75,3 +75,25 @@ input[type=number] {
   object-fit: cover;
   margin : auto;
 }
+
+
+.glassFilter {
+  background: rgba(233, 223, 223, 0.8);
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .glassFilter {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+.whiteCard{
+  background-color : #fff;
+  padding : 2rem;
+}
+.fullWidth{
+  min-width: 100vw;
+}
+.fullHeight{
+  min-height:  calc(100vh - 64px);
+}

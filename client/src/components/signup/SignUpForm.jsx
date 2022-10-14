@@ -1,16 +1,10 @@
-import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Grid,
-  Button,
-  Container,
-  Message,
-} from "semantic-ui-react";
+import React, { Fragment, useState } from "react";
+import { Form, Input, Grid, Button, Message } from "semantic-ui-react";
 import { Link, Navigate } from "react-router-dom";
 import classes from "./SignUpForm.module.css";
 import { publicRequest } from "../../utils/requestMethod";
-
+import backgroundImage from "../../Images/triangles-1430105.svg";
+import { Footer } from "../footer/Footer";
 const SignUpForm = (props) => {
   const user = props.user;
   const [loading, setLoading] = useState(false);
@@ -35,8 +29,8 @@ const SignUpForm = (props) => {
   const handleSubmit = (e) => {
     setLoading(true);
     publicRequest
-    .post("/auth/signup", initalValue)
-    .then((response) => {
+      .post("/auth/signup", initalValue)
+      .then((response) => {
         setLoading(false);
         setServerRes({
           type: "success",
@@ -61,110 +55,129 @@ const SignUpForm = (props) => {
         });
         setLoading(false);
       });
-    };
-    if (!user) {
-      return (
-        <Container className={`centered ${classes.container}`} text>
-        {serverRes && (
-          <Message
-            warning
-            header={serverRes.header}
-            content={serverRes.message}
-          />
-        )}
-        <div>
-
-        <Form onSubmit={handleSubmit}>
-          <Grid columns={2}>
-            <Grid.Row>
-              <Grid.Column>
-                <Form.Field>
-                  <label>First Name</label>
-                  <Input
-                    placeholder="First Name"
-                    value={firstName}
-                    name="firstName"
-                    onChange={handleChange}
-                    required
-                    icon="user"
-                    iconPosition="left"
-                  />
-                </Form.Field>
-              </Grid.Column>
-              <Grid.Column>
-                <Form.Field>
-                  <label>Last Name</label>
-                  <Input
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastName}
-                    name="lastName"
-                    onChange={handleChange}
-                    required
-                    icon="user"
-                    iconPosition="left"
-                  />
-                </Form.Field>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column>
-                <Form.Field>
-                  <label>Email</label>
-                  <Input
-                    type="email"
-                    placeholder="Your Email"
-                    value={email}
-                    name="email"
-                    onChange={handleChange}
-                    required
-                    icon="at"
-                    iconPosition="left"
-                  />
-                </Form.Field>
-              </Grid.Column>
-              <Grid.Column>
-                <Form.Field>
-                  <label>Password</label>
-                  <Input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    name="password"
-                    onChange={handleChange}
-                    required
-                    icon="key"
-                    iconPosition="left"
-                  />
-                </Form.Field>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-          <Grid columns={1}>
-            <Grid.Row>
-              <Grid.Column>
-                <Button secondary type="submit" loading={loading}>
-                  Sign Up
-                </Button>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Form>
-        <div className="ui horizontal divider">Or</div>
-        <Link to="/login">
-          <button
-            className="ui animated left button"
-            type="submit"
-            tabIndex="0"
-          >
-            <div className=" visible content">Already Have Account ?</div>
-            <div className="hidden content">
-              <i className="left arrow icon"></i>Login
+  };
+  if (!user) {
+    return (
+      <Fragment>
+        <div
+          className={classes.mainContainer}
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
+          {serverRes && (
+            <Message
+              warning
+              header={serverRes.header}
+              content={serverRes.message}
+            />
+          )}
+          <div className={classes.mainDiv}>
+            <div className={classes.formDiv}>
+              <p>Welcome To The Human Resource Management</p>
+              <Form onSubmit={handleSubmit}>
+                <Grid stackable columns={2}>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Form.Field>
+                        <label>First Name</label>
+                        <Input
+                          placeholder="First Name"
+                          value={firstName}
+                          name="firstName"
+                          onChange={handleChange}
+                          required
+                          icon="user"
+                          iconPosition="left"
+                        />
+                      </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Form.Field>
+                        <label>Last Name</label>
+                        <Input
+                          type="text"
+                          placeholder="Last Name"
+                          value={lastName}
+                          name="lastName"
+                          onChange={handleChange}
+                          required
+                          icon="user"
+                          iconPosition="left"
+                        />
+                      </Form.Field>
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Form.Field>
+                        <label>Email</label>
+                        <Input
+                          type="email"
+                          placeholder="Your Email"
+                          value={email}
+                          name="email"
+                          onChange={handleChange}
+                          required
+                          icon="at"
+                          iconPosition="left"
+                        />
+                      </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Form.Field>
+                        <label>Password</label>
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          value={password}
+                          name="password"
+                          onChange={handleChange}
+                          required
+                          icon="key"
+                          iconPosition="left"
+                        />
+                      </Form.Field>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+                <Grid textAlign="center" columns={1}>
+                  <Grid.Row>
+                    <Grid.Column>
+                      <Button
+                        size="large"
+                        secondary
+                        type="submit"
+                        loading={loading}
+                        icon="add user"
+                        content="Sign Up"
+                      />
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </Form>
+              <div className="ui horizontal divider">Or</div>
+              <div className={classes.haveAccountBtn}>
+                <Link to="/login">
+                  <button
+                    className={`ui animated left button`}
+                    type="submit"
+                    tabIndex="0"
+                  >
+                    <div className=" visible content">
+                      Already Have Account ?
+                    </div>
+                    <div className="hidden content">
+                      <i className="left arrow icon"></i>Login
+                    </div>
+                  </button>
+                </Link>
+              </div>
             </div>
-          </button>
-        </Link>
+          </div>
         </div>
-      </Container>
+        <div>
+          <Footer />
+        </div>
+      </Fragment>
     );
   } else {
     return <Navigate to="/"></Navigate>;

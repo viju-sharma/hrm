@@ -1,0 +1,32 @@
+.heartImg{
+    height : 1.2rem;
+    padding-inline: 1rem;
+}
+
+.mainContainer{
+    
+    z-index : 100;
+    text-align : center;
+    position: fixed;
+    bottom: 0;
+    width : 100%;
+}
+
+.mainDiv {
+    width: min(90vw, 95vw);
+    margin : auto;
+    padding : 1rem;
+    background: rgba(255, 255, 255, 0.36);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+}
+
+@media only screen and (max-width: 435px) {
+  .mainDiv {
+    padding : 5px;
+  }
+}

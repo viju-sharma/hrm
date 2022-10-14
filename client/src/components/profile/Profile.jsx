@@ -5,11 +5,17 @@ import backgroundImage from "../../Images/triangles-1430105.svg";
 const Profile = () => {
   return (
     <Fragment>
-      <Navigation />
+      <Navigation title="Profile" icon="user outline" />
       <div
         className={classes.mainContainer}
         style={{ backgroundImage: `url(${backgroundImage})` }}
-      ></div>
+      >
+        <div className={classes.mainDiv}>
+          <div>
+            <img src="" alt="Profile" />
+          </div>
+        </div>
+      </div>
     </Fragment>
   );
 };
