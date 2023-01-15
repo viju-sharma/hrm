@@ -1,5 +1,4 @@
 import { useState, useEffect, Fragment } from "react";
-import Navigation from "../navigation/Navigation";
 import classes from "./Profile.module.css";
 import backgroundImage from "../../Images/triangles-1430105.svg";
 import { privateRequest } from "../../utils/requestMethod";
@@ -9,6 +8,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../utils/firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useRef } from "react";
+import Navigation from "../../components/navigation/Navigation";
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState([]);

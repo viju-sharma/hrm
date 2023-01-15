@@ -4,11 +4,10 @@ import { useDispatch } from "react-redux";
 import { login } from "../../features/auth-slice";
 import classes from "./Loginpage.module.css";
 import ForgotPassword from "./ForgotPassword";
-import Typewriter from "typewriter-effect";
 import { publicRequest } from "../../utils/requestMethod";
 import backgroundImg from "../../Images/triangles-1430105.svg";
-import { Footer } from "../footer/Footer";
 import { Divider } from "semantic-ui-react";
+import { Footer } from "../../components/footer/Footer";
 const LoginPage = (props) => {
   const [isErr, setErr] = useState();
   const dispatch = useDispatch();

@@ -6,24 +6,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { privateRequest } from "./utils/requestMethod";
 import { login, logout } from "./features/auth-slice";
 
-const LoginPage = lazy(() => import("./components/login/LoginPage"));
+const LoginPage = lazy(() => import("./pages/Login/LoginPage"));
 const SignUpForm = lazy(() => import("./components/signup/SignUpForm"));
 
-const AddEmployee = lazy(() => import("./components/private/AddEmployee"));
-const AllEmployee = lazy(() => import("./components/private/AllEmployee"));
-const Attendance = lazy(() => import("./components/attendence/Attendance"));
+const AddEmployee = lazy(() => import("./pages/AddEmployees/AddEmployee"));
+const AllEmployee = lazy(() => import("./pages/AllEmployee/AllEmployee"));
+const Attendance = lazy(() => import("./pages/Attendence/Attendance"));
 
 const VerifyAccount = lazy(() =>
-  import("./components/verification/EmailVerification")
+  import("./pages/Verification/EmailVerification")
 );
 
 const PasswordRecovery = lazy(() =>
-  import("./components/PasswordRecovery/PasswordRecovery")
+  import("./pages/PasswordRecovery/PasswordRecovery")
 );
 
-const Profile = lazy(() => import("./components/profile/Profile"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
 
-const Home = lazy(() => import("./components/home/Home"));
+const Home = lazy(() => import("./pages/Home/Home"));
 
 function App() {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import classes from "./Home.module.css";
-import Navigation from "../navigation/Navigation";
 import { Statistic } from "semantic-ui-react";
 import { privateRequest } from "../../utils/requestMethod";
+import Navigation from "../../components/navigation/Navigation";
 
 const fetchTotalEmployees = async () => {
   try {

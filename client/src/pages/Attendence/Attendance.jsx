@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navigation from "../navigation/Navigation";
 import AbsentEmployeeCard from "./AbsentEmployeeCard";
 import PresentEmployeeCard from "./PresentEmployeeCard";
 
@@ -11,6 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Navigation from "../../components/navigation/Navigation";
 
 const Attendance = (props) => {
   const searchValue = useSelector((state) => state.searchValue.search);

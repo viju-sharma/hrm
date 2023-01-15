@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import Navigation from "../navigation/Navigation";
-import Employee from "./Employee";
-import ViewEmployee from "../Modal/viewEmployee";
+import Employee from "../../components/EmployeeCard/Employee";
+import ViewEmployee from "../../components/Modal/viewEmployee";
 import { openModal } from "../../features/modal-slice";
 import { privateRequest } from "../../utils/requestMethod";
+import Navigation from "../../components/navigation/Navigation";
 
 const AllEmployee = (props) => {
   const [isUpdated, setUpdated] = useState(false);

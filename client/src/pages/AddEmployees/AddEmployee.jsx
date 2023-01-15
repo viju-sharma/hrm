@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Button, Container, Dropdown } from "semantic-ui-react";
+import { Button, Dropdown } from "semantic-ui-react";
 import { countryOptions, stateOptions } from "../../utils/util";
-import Navigation from "../navigation/Navigation";
 import { privateRequest } from "../../utils/requestMethod";
 
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../utils/firebase";
 import { v4 as uuidv4 } from "uuid";
+import Navigation from "../../components/navigation/Navigation";
 
 const AddEmployee = (props) => {
   const profileImageRef = useRef();
