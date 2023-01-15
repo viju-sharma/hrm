@@ -68,12 +68,14 @@ const AddEmployee = (props) => {
         return alert("Please fill all details");
       }
       e.preventDefault();
-      await privateRequest.post("/api/employee/addEmployee", postData).then(() => {
-        setAdded(true);
-        setValues(emptyField);
-        setImageFile(null);
-        return setLoading(false);
-      });
+      await privateRequest
+        .post("/api/employee/addEmployee", postData)
+        .then(() => {
+          setAdded(true);
+          setValues(emptyField);
+          setImageFile(null);
+          return setLoading(false);
+        });
     } catch (error) {
       alert(error.message);
       setFailed(true);
@@ -102,7 +104,7 @@ const AddEmployee = (props) => {
   return (
     <React.Fragment>
       <Navigation icon="add user" title="Add Employee" active="addemployee" />
-      <Container>
+      <div className="max-w-[100rem] m-auto p-16">
         {isAdded && (
           <div className="ui success message">
             <div className="header">Employee Added</div>
@@ -295,7 +297,7 @@ const AddEmployee = (props) => {
             ></Button>
           </div>
         </form>
-      </Container>
+      </div>
     </React.Fragment>
   );
 };
