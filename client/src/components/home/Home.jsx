@@ -6,7 +6,7 @@ import { privateRequest } from "../../utils/requestMethod";
 
 const fetchTotalEmployees = async () => {
   try {
-    const result = await privateRequest.get("/employee/totalEmployees");
+    const result = await privateRequest.get("/api/employee/totalEmployees");
     return result.data.totalEmployees;
   } catch (error) {
     console.log(error);

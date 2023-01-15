@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/14eafae8-657b-4058-9da1-ddbc5ac451d1/appservices/subscriptions/14eafae8-657b-4058-9da1-ddbc5ac451d1/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/hrm-vijender",
+    "appService.deploySubpath": "."
+}

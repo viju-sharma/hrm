@@ -8,7 +8,7 @@ const SingleCard = (props) => {
 
   const removeLeave = () => {
     privateRequest
-      .post("/employee/removeLeave", {
+      .post("/api/employee/removeLeave", {
         emp_Id: props.emp_Id,
       })
       .then((result) => {

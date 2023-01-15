@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Modal, Image, Grid, Icon, Header } from "semantic-ui-react";
 import { closeModal } from "../../features/modal-slice";
 import { privateRequest } from "../../utils/requestMethod";
+import classes from "./ViewEmp.module.css";
 
 const ViewEmployee = (props) => {
   const [secondOpen, setSecondOpen] = useState(false);
@@ -31,7 +32,7 @@ const ViewEmployee = (props) => {
 
   const handleDelete = () => {
     privateRequest
-      .post("/employee/deleteEmployee", {
+      .post("/api/employee/deleteEmployee", {
         userId: employee._id,
       })
       .then(() => {
@@ -65,7 +66,7 @@ const ViewEmployee = (props) => {
       };
       e.preventDefault();
       privateRequest
-        .post("/employee/editEmployee", postData)
+        .post("/api/employee/editEmployee", postData)
         .then((response) => {
           if (response.status === 200) {
             setAdded(true);
@@ -110,7 +111,13 @@ const ViewEmployee = (props) => {
           </Grid>
         </Modal.Header>
         <Modal.Content image>
-          <Image size="medium" src={initialValues.profileImg} wrapped />
+          <div className={classes.imageDiv}>
+            <img
+              className="coverImg roundImg"
+              src={initialValues.profileImg}
+              alt=""
+            />
+          </div>
           <Modal.Description>
             <form className="ui form " onSubmit={handleSubmit}>
               <h4 className="ui dividing header">Employee Information</h4>

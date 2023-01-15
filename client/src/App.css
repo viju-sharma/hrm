@@ -76,6 +76,9 @@ input[type=number] {
   margin : auto;
 }
 
+.roundImg{
+    border-radius: 50%;
+}
 
 .glassFilter {
   background: rgba(233, 223, 223, 0.8);

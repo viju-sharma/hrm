@@ -68,7 +68,7 @@ const AddEmployee = (props) => {
         return alert("Please fill all details");
       }
       e.preventDefault();
-      await privateRequest.post("/employee/addEmployee", postData).then(() => {
+      await privateRequest.post("/api/employee/addEmployee", postData).then(() => {
         setAdded(true);
         setValues(emptyField);
         setImageFile(null);

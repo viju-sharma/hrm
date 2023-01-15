@@ -15,7 +15,7 @@ const AllEmployee = (props) => {
 
   const [employeeSelected, setEmployee] = useState();
   useEffect(() => {
-    privateRequest.get("/employee/getEmployees").then((result) => {
+    privateRequest.get("/api/employee/getEmployees").then((result) => {
       setEmployees(result.data);
     });
   }, [isUpdated]);

@@ -22,7 +22,7 @@ const PresentEmployeeCard = (props) => {
   useEffect(() => {
     // getAllEmployees
     privateRequest
-      .get("/employee/getEmployees")
+      .get("/api/employee/getEmployees")
       .then((result) => {
         setEmployees(result.data);
       })
@@ -50,7 +50,7 @@ const PresentEmployeeCard = (props) => {
 
     const addLeave = () => {
       privateRequest
-        .post("/employee/addLeave", postData)
+        .post("/api/employee/addLeave", postData)
         .then((result) => {
           dispatch(isChanged());
         })

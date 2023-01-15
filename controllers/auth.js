@@ -79,7 +79,7 @@ exports.Login = async (req, res, next) => {
         .send({ message: "An email is sent to your account please verify" });
     }
     const token = signJWT(user._id);
-    res.cookie(String(user._id), token, {
+    res.cookie("token", token, {
       path: "/",
       httpOnly: true,
       sameSite: "lax",
@@ -87,6 +87,7 @@ exports.Login = async (req, res, next) => {
     return res
       .status(200)
       .send({ userId: user._id, message: "Login Successful" });
+      
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Internal server error" });

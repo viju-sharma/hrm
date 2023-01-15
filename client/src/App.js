@@ -14,6 +14,7 @@ import VerifyAccount from "./components/verification/EmailVerification";
 import PasswordRecovery from "./components/PasswordRecovery/PasswordRecovery";
 import { privateRequest } from "./utils/requestMethod";
 import Profile from "./components/profile/Profile";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -33,7 +34,7 @@ function App() {
   const userId = useSelector((state) => state.auth.user);
   return (
     <div className="App">
-      <Routes>
+      <Routes>n
         <Route
           path="/addEmployee"
           element={

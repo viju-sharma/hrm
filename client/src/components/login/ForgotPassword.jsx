@@ -43,7 +43,7 @@ function ForgotPassword() {
     }
     try {
       setLoading(true);
-      const response = await publicRequest.post("/verify/forgetPassword", {
+      const response = await publicRequest.post("/api/verify/forgetPassword", {
         email: recoveryEmail,
       });
       setMessage({

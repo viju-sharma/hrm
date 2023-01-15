@@ -20,7 +20,7 @@ const AbsentEmployeeCard = (props) => {
   useEffect(() => {
     // get absentEmployees
     privateRequest
-      .get("/employee/getAbsentToday")
+      .get("/api/employee/getAbsentToday")
       .then((result) => {
         setAbsentEmployees(result.data);
       })

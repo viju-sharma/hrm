@@ -29,7 +29,7 @@ const LoginPage = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     publicRequest
-      .post("/auth/login", initialValue)
+      .post("/api/auth/login", initialValue)
       .then((response) => {
         response.status === 200 && dispatch(login(response.data.userId));
       })

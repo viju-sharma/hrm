@@ -12,7 +12,7 @@ const VerifyAccount = () => {
   useEffect(() => {
     setLoading(true);
     publicRequest
-      .get(`/verify/${id}/verify/${token}`)
+      .get(`/api/verify/${id}/verify/${token}`)
       .then((response) => {
         console.log(response);
         setLoading(false);

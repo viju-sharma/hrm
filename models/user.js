@@ -26,6 +26,9 @@ const usersSchema = new Schema(
         ref: "employee",
       },
     ],
+    profileImg: {
+      type: String,
+    },
     verified: { type: Boolean, default: false },
   },
   {

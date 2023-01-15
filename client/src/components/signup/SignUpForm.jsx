@@ -29,7 +29,7 @@ const SignUpForm = (props) => {
   const handleSubmit = (e) => {
     setLoading(true);
     publicRequest
-      .post("/auth/signup", initalValue)
+      .post("/api/auth/signup", initalValue)
       .then((response) => {
         setLoading(false);
         setServerRes({

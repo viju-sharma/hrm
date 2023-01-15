@@ -19,7 +19,6 @@ const app = express();
 // const helmet = require("helmet");
 // app.use(helmet());
 
-
 // Cookie-parser
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
@@ -30,10 +29,10 @@ app.use(express.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/verify", verificationRoutes);
-app.use("/auth", authRoutes);
-app.use("/employee", employeeRoutes);
-app.use("/user", adminRoutes);
+app.use("/api/verify", verificationRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/employee", employeeRoutes);
+app.use("/api/user", adminRoutes);
 
 // Serve Static assets if in production
 if (process.env.NODE_ENV === "production") {

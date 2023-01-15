@@ -48,7 +48,7 @@ const PasswordRecovery = () => {
       return setIsError(true);
     }
     try {
-      const response = await publicRequest.post("/verify/changePassword", {
+      const response = await publicRequest.post("/api/verify/changePassword", {
         id,
         clientToken: token,
         password: inputValue.input1,

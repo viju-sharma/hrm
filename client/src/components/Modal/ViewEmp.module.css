@@ -1,0 +1,11 @@
+.imageDiv {
+    width: 10rem;
+    height: 10rem;
+    margin-inline-end: 2rem;
+}
+
+@media only screen and (max-width: 765px) {
+    .imageDiv {
+        margin: auto
+    }
+}
