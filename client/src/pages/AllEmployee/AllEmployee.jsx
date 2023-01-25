@@ -29,8 +29,8 @@ const AllEmployee = (props) => {
       <Employee
         key={employee._id}
         onClick={() => {
-          dispatch(openModal({ dimmer: "blurring" }));
           setEmployee(employee);
+          dispatch(openModal({ dimmer: "blurring" }));
         }}
         employee={employee}
       />

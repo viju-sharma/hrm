@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { privateRequest } from "./utils/requestMethod";
 import { login, logout } from "./features/auth-slice";
 
+import LoadingPage from "./components/LoadingPage/LoadingPage";
+
 const LoginPage = lazy(() => import("./pages/Login/LoginPage"));
 const SignUpForm = lazy(() => import("./components/signup/SignUpForm"));
 
@@ -30,7 +32,7 @@ function App() {
 
   useEffect(() => {
     privateRequest
-      .post("/auth/check")
+      .post("/api/auth/check")
       .then((response) => {
         dispatch(login(response.data.userId));
       })
@@ -44,9 +46,8 @@ function App() {
   const userId = useSelector((state) => state.auth.user);
   return (
     <div className="App">
-      <Suspense fallback={<div>Loading</div>}>
+      <Suspense fallback={<LoadingPage />}>
         <Routes>
-          n
           <Route
             path="/addEmployee"
             element={

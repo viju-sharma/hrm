@@ -5,7 +5,7 @@ const Employee = (props) => {
   return (
     <div className={classes.card} onClick={props.onClick}>
       <div className={classes.imageDiv}>
-        <img className="coverImg" src={employee.profileImg} alt="profile" />
+        <img className="coverImg" src={employee?.profileImg ? employee?.profileImg : "/images/matthew.png"} alt="profile" />
       </div>
       <div className={classes.nameDiv}>
         <p className={classes.name}>{employee.fullName}</p>

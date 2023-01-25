@@ -236,6 +236,8 @@ function AccountMenu() {
     dispatch(logout());
   };
 
+  const user = useSelector((state) => state.auth);
+
   return (
     <React.Fragment>
       <Tooltip title="Account settings">
@@ -247,7 +249,7 @@ function AccountMenu() {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          <Avatar sx={{ width: 32, height: 32 }} src="/images/matthew.png" />
+          <Avatar sx={{ width: 32, height: 32 }} src={`/images/matthew.png`} />
         </IconButton>
       </Tooltip>
       <Menu

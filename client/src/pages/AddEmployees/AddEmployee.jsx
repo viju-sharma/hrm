@@ -53,7 +53,6 @@ const AddEmployee = (props) => {
     try {
       if (
         initialValue.fullName === "" ||
-        initialValue.profileImg === "" ||
         initialValue.email === "" ||
         initialValue.mobile === "" ||
         initialValue.streetAdd === "" ||

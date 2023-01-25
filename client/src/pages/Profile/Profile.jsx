@@ -16,6 +16,7 @@ const Profile = () => {
   const [imageFile, setImageFile] = useState(null);
 
   const [imageuploadLoading, setImageUploadLoading] = useState(false);
+
   // const [loading, setLoading] = useState(false);
 
   const [isChanged, setChanged] = useState(false);
@@ -108,6 +109,10 @@ const Profile = () => {
               color="instagram"
               circular
             />
+          </div>
+          <div>
+            <h1>{userDetails.firstname + " " + userDetails.lastname}</h1>
+            <h1>{userDetails.email}</h1>
           </div>
         </div>
       </div>
